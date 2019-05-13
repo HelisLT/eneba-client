@@ -1,0 +1,40 @@
+{
+    "name": "helis/eneba-client",
+    "description": "Eneba client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Helis LT",
+            "email": "info@helis.lt"
+        }
+    ],
+    "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Helis\\EnebaClient\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-json": "*",
+        "helis/graphql-query-builder": "dev-master",
+        "moneyphp/money": "^3.2",
+        "myclabs/php-enum": "^1.7",
+        "php-http/curl-client": "^2.0",
+        "php-http/message": "^1.7",
+        "php-http/message-factory": "^1.0",
+        "psr/cache": "^1.0",
+        "psr/http-message": "^1.0",
+        "psr/log": "^1.1",
+        "ramsey/uuid": "^3.8",
+        "zendframework/zend-diactoros": "^2.1"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "sort-packages": true,
+        "secure-http": false
+    }
+}
