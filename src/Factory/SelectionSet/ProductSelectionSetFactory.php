@@ -25,6 +25,7 @@ class ProductSelectionSetFactory implements SelectionSetFactoryInterface, Select
         $set = new SelectionSet([
             new Field('id'),
             new Field('name'),
+            new Field('slug'),
             new Field('platform', new SelectionSet([
                 new Field('name'),
                 new Field('enum'),

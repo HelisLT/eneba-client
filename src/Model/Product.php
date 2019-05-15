@@ -11,6 +11,7 @@ class Product
 {
     private $id;
     private $name;
+    private $slug;
     private $platform;
     private $releasedAt;
 
@@ -19,10 +20,16 @@ class Product
      */
     private $auctions;
 
-    public function __construct(UuidInterface $id, string $name, string $platform, ?DateTimeInterface $releasedAt)
-    {
+    public function __construct(
+        UuidInterface $id,
+        string $name,
+        string $slug,
+        string $platform,
+        ?DateTimeInterface $releasedAt
+    ) {
         $this->id = $id;
         $this->name = $name;
+        $this->slug = $slug;
         $this->platform = $platform;
         $this->releasedAt = $releasedAt;
     }
@@ -35,6 +42,11 @@ class Product
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function getPlatform(): string

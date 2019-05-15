@@ -20,6 +20,7 @@ class ProductDenormalizer implements DenormalizerInterface, DenormalizerAwareInt
         $product = new Product(
             Uuid::fromString($data['id']),
             $data['name'],
+            $data['slug'],
             $data['platform']['name'],
             isset($data['releasedAt']) ? new DateTime($data['releasedAt']) : null
         );
