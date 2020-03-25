@@ -14,10 +14,12 @@ use Helis\EnebaClient\Exception\HttpException;
 use Helis\EnebaClient\Model\AccessToken;
 use Helis\EnebaClient\Model\ActionResponse;
 use Helis\EnebaClient\Model\ActionState;
+use Helis\EnebaClient\Model\Input\KeysFilter;
 use Helis\EnebaClient\Model\Input\ProductsFilter;
 use Helis\EnebaClient\Model\Input\SalesFilter;
 use Helis\EnebaClient\Model\Input\StockFilter;
 use Helis\EnebaClient\Model\Product;
+use Helis\EnebaClient\Model\Relay\Connection\KeyConnection;
 use Helis\EnebaClient\Model\Relay\Connection\ProductConnection;
 use Helis\EnebaClient\Model\Relay\Connection\SalesConnection;
 use Helis\EnebaClient\Model\Relay\Connection\StockConnection;
@@ -41,6 +43,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidInterface;
+use Webmozart\Assert\Assert;
 
 class Client implements ClientInterface
 {
@@ -205,6 +208,103 @@ class Client implements ClientInterface
         );
     }
 
+    /**
+     * @param string[] $keys
+     */
+    public function addKeysToAuction(UuidInterface $auctionId, array $keys): ActionResponse
+    {
+        Assert::notEmpty($keys);
+        Assert::allString($keys);
+
+        $mutation = (new Mutation())
+            ->addField(
+                new Field(
+                    Eneba::GQL_UPDATE_AUCTION_MUTATION,
+                    $this->selectionSetFactoryProvider->get(ProviderNameEnum::ACTION_RESPONSE())->get(),
+                    [
+                        'input' => new VariableValue('$input'),
+                    ]
+                )
+            )
+            ->addVariable(new ScalarVariable('$input', 'S_API_UpdateAuctionInput', true));
+
+        $request = $this->createMessage($mutation->toString(), [
+            'input' => [
+                'id' => $auctionId->toString(),
+                'addedKeys' => array_unique($keys),
+            ],
+        ]);
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize(
+            $data['data'][Eneba::GQL_UPDATE_AUCTION_MUTATION],
+            ActionResponse::class
+        );
+    }
+
+    /**
+     * @param UuidInterface[] $keysIds
+     */
+    public function removeKeysFromAuction(UuidInterface $auctionId, array $keysIds): ActionResponse
+    {
+        Assert::notEmpty($keysIds);
+        Assert::allIsInstanceOf($keysIds, UuidInterface::class);
+
+        $mutation = (new Mutation())
+            ->addField(
+                new Field(
+                    Eneba::GQL_UPDATE_AUCTION_MUTATION,
+                    $this->selectionSetFactoryProvider->get(ProviderNameEnum::ACTION_RESPONSE())->get(),
+                    [
+                        'input' => new VariableValue('$input'),
+                    ]
+                )
+            )
+            ->addVariable(new ScalarVariable('$input', 'S_API_UpdateAuctionInput', true));
+
+        $request = $this->createMessage($mutation->toString(), [
+            'input' => [
+                'id' => $auctionId->toString(),
+                'removedKeys' => array_map('strval', array_unique($keysIds)),
+            ],
+        ]);
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize(
+            $data['data'][Eneba::GQL_UPDATE_AUCTION_MUTATION],
+            ActionResponse::class
+        );
+    }
+
+    public function getAuctionKeys(UuidInterface $auctionId, ?KeysFilter $filter = null): KeyConnection
+    {
+        $query = $this->createConnectionQuery(
+            Eneba::GQL_KEYS_QUERY,
+            $this->selectionSetFactoryProvider->get(ProviderNameEnum::KEY_CONNECTION())->get(),
+            [
+                'stockId' => new VariableValue('$stockId'),
+            ]
+        )
+            ->addVariable(new ScalarVariable('$stockId', 'S_Uuid', true));
+
+        $request = $this->createMessage(
+            $query->toString(),
+            array_merge(['stockId' => $auctionId->toString()], $filter ? [
+                'cursor' => $this->generateCursor($filter->getPage(), $filter->getPerPage()),
+                'limit' => $filter->getPerPage(),
+            ] : [])
+        );
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize($data['data'][Eneba::GQL_KEYS_QUERY], KeyConnection::class);
+    }
+
     public function getActionState(UuidInterface $actionId): ?ActionState
     {
         $query = (new Query())
@@ -277,6 +377,12 @@ class Client implements ClientInterface
                 throw new HttpException($data['message'] ?? 'HTTP exception');
             }
 
+            $messages = array_column($data['errors'] ?? [], 'message');
+            $exceptions = array_column(array_column($data['errors'] ?? [], 'extensions'), 'code');
+            throw new GraphQLException($messages, $exceptions);
+        }
+
+        if (isset($data['errors'])) {
             $messages = array_column($data['errors'] ?? [], 'message');
             $exceptions = array_column(array_column($data['errors'] ?? [], 'extensions'), 'code');
             throw new GraphQLException($messages, $exceptions);

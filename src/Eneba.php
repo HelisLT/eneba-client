@@ -5,7 +5,7 @@ namespace Helis\EnebaClient;
 
 final class Eneba
 {
-    public const API_CLIENT_VERSION = 1;
+    public const API_CLIENT_VERSION = 1.1;
     public const TOKEN_EXPIRATION_TIME_WINDOW = 60;
 
     public const OAUTH_GRANT_TYPE = 'api_consumer';
@@ -20,4 +20,5 @@ final class Eneba
     public const GQL_PRODUCT_QUERY = 'S_product';
     public const GQL_ACTION_QUERY = 'A_action';
     public const GQL_UPDATE_AUCTION_MUTATION = 'S_updateAuction';
+    public const GQL_KEYS_QUERY = 'S_keys';
 }

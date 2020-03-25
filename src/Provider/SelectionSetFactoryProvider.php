@@ -8,6 +8,7 @@ use Helis\EnebaClient\Factory\SelectionSet\ActionResponseSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\ActionSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\AuctionSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\ConnectionSelectionSetFactory;
+use Helis\EnebaClient\Factory\SelectionSet\KeySelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\MoneySelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\ProductSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\SalesSelectionSetFactory;
@@ -42,6 +43,8 @@ class SelectionSetFactoryProvider implements SelectionSetFactoryProviderInterfac
             ProviderNameEnum::PRODUCT_CONNECTION => new ConnectionSelectionSetFactory(ProviderNameEnum::PRODUCT()),
             ProviderNameEnum::SALES_CONNECTION => new ConnectionSelectionSetFactory(ProviderNameEnum::SALES()),
             ProviderNameEnum::STOCK_CONNECTION => new ConnectionSelectionSetFactory(ProviderNameEnum::STOCK()),
+            ProviderNameEnum::KEY_CONNECTION => new ConnectionSelectionSetFactory(ProviderNameEnum::KEY()),
+            ProviderNameEnum::KEY => new KeySelectionSetFactory(),
         ];
     }
 

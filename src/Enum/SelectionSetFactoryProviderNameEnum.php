@@ -19,6 +19,8 @@ use MyCLabs\Enum\Enum;
  * @method static static PRODUCT()
  * @method static static SALES()
  * @method static static STOCK()
+ * @method static static KEY_CONNECTION()
+ * @method static static KEY()
  */
 class SelectionSetFactoryProviderNameEnum extends Enum
 {
@@ -34,4 +36,6 @@ class SelectionSetFactoryProviderNameEnum extends Enum
     public const PRODUCT = 'product';
     public const SALES = 'sales';
     public const STOCK = 'stock';
+    public const KEY_CONNECTION = 'keyConnection';
+    public const KEY = 'key';
 }

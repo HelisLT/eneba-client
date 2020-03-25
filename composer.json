@@ -29,6 +29,7 @@
         "psr/http-message": "^1.0",
         "psr/log": "^1.1",
         "ramsey/uuid": "^3.8",
+        "webmozart/assert": "^1.7",
         "zendframework/zend-diactoros": "^2.1"
     },
     "require-dev": {

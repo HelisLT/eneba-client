@@ -53,7 +53,31 @@ $stock = $client->getStock();
 Updates given auction price.
 
 ```php
-$auctionResponse = $client->updateAuction($auctionId, $price);
+$actionResponse = $client->updateAuction($auctionId, $price);
+```
+
+### Get auction keys
+
+Returns paginated list of your auction's keys.
+
+```php
+$keys = $client->getAuctionKeys($auctionId);
+```
+
+### Add keys to auction
+
+Adds given keys to selected auction.
+
+```php
+$actionResponse = $client->addKeysToAuction($auctionId, $keys);
+```
+
+### Remove keys from auction
+
+Removes given keys from selected auction.
+
+```php
+$actionResponse = $client->removeKeysFromAuction($auctionId, $keysIds);
 ```
 
 ### Get action state

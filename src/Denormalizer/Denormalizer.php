@@ -10,6 +10,9 @@ use Helis\EnebaClient\Denormalizer\Object\AuctionConnectionDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\AuctionDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\AuctionEdgeDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\AuthResponseDenormalizer;
+use Helis\EnebaClient\Denormalizer\Object\KeyConnectionDenormalizer;
+use Helis\EnebaClient\Denormalizer\Object\KeyDenormalizer;
+use Helis\EnebaClient\Denormalizer\Object\KeyEdgeDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\MoneyDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\PageInfoDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\ProductConnectionDenormalizer;
@@ -58,6 +61,9 @@ class Denormalizer implements DenormalizerInterface
             new AuctionConnectionDenormalizer(),
             new StockConnectionDenormalizer(),
             new SalesConnectionDenormalizer(),
+            new KeyDenormalizer(),
+            new KeyConnectionDenormalizer(),
+            new KeyEdgeDenormalizer(),
         ];
     }
 
