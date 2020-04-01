@@ -21,6 +21,7 @@ use MyCLabs\Enum\Enum;
  * @method static static STOCK()
  * @method static static KEY_CONNECTION()
  * @method static static KEY()
+ * @method static static COUNT_FEE()
  */
 class SelectionSetFactoryProviderNameEnum extends Enum
 {
@@ -38,4 +39,5 @@ class SelectionSetFactoryProviderNameEnum extends Enum
     public const STOCK = 'stock';
     public const KEY_CONNECTION = 'keyConnection';
     public const KEY = 'key';
+    public const COUNT_FEE = 'countFee';
 }

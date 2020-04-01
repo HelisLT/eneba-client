@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Helis\EnebaClient;
 
+use Helis\EnebaClient\Enum\FeeTypeEnum;
 use Helis\EnebaClient\Model\ActionResponse;
 use Helis\EnebaClient\Model\ActionState;
 use Helis\EnebaClient\Model\Input\KeysFilter;
@@ -42,4 +43,6 @@ interface ClientInterface
     public function removeKeysFromAuction(UuidInterface $auctionId, array $keysIds): ActionResponse;
 
     public function getAuctionKeys(UuidInterface $auctionId, ?KeysFilter $filter = null): KeyConnection;
+
+    public function getFee(FeeTypeEnum $feeType): ?Money;
 }

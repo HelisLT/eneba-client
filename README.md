@@ -87,3 +87,12 @@ Returns status of action. Can be used to check if auction price request is fulfi
 ```php
 $state = $client->getActionState($auctionResponse->getActionId());
 ```
+
+
+### Get fee
+
+Returns fee of a given type.
+
+```php
+$fee = $client->getFee(FeeTypeEnum::AUCTION_PRICE_UPDATE());
+```

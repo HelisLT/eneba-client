@@ -7,6 +7,7 @@ use DateTime;
 use Helis\EnebaClient\Credentials\ClientCredentialsInterface;
 use Helis\EnebaClient\Denormalizer\Denormalizer;
 use Helis\EnebaClient\Denormalizer\DenormalizerInterface;
+use Helis\EnebaClient\Enum\FeeTypeEnum;
 use Helis\EnebaClient\Enum\SelectionSetFactoryProviderNameEnum as ProviderNameEnum;
 use Helis\EnebaClient\Exception\GeneralException;
 use Helis\EnebaClient\Exception\GraphQLException;
@@ -325,6 +326,28 @@ class Client implements ClientInterface
         $data = $this->handleResponse($response);
 
         return $this->denormalizer->denormalize($data['data'][Eneba::GQL_ACTION_QUERY], ActionState::class);
+    }
+
+    public function getFee(FeeTypeEnum $feeType): ?Money
+    {
+        $query = (new Query())
+            ->addField(
+                new Field(
+                    Eneba::GQL_COUNT_FEE_QUERY,
+                    $this->selectionSetFactoryProvider->get(ProviderNameEnum::COUNT_FEE())->get(),
+                    [
+                        'type' => new VariableValue('$type'),
+                    ]
+                )
+            )
+            ->addVariable(new ScalarVariable('$type', 'T_FeeTypeEnum', true));
+
+        $request = $this->createMessage($query->toString(), ['type' => $feeType->getKey()]);
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize($data['data'][Eneba::GQL_COUNT_FEE_QUERY]['fee'] ?? [], Money::class);
     }
 
     public function setOauthClientId(?string $oauthClientId): void
