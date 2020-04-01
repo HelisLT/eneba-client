@@ -7,6 +7,7 @@ use DateTime;
 use Helis\EnebaClient\Denormalizer\DenormalizerAwareInterface;
 use Helis\EnebaClient\Denormalizer\DenormalizerAwareTrait;
 use Helis\EnebaClient\Denormalizer\DenormalizerInterface;
+use Helis\EnebaClient\Model\PriceUpdateQuota;
 use Helis\EnebaClient\Model\Product;
 use Helis\EnebaClient\Model\Stock;
 use Money\Money;
@@ -18,7 +19,7 @@ class StockDenormalizer implements DenormalizerInterface, DenormalizerAwareInter
 
     public function denormalize($data, string $class): Stock
     {
-        return new Stock(
+        $stock = new Stock(
             Uuid::fromString($data['id']),
             $this->denormalizer->denormalize($data['product'], Product::class),
             $data['unitsSold'],
@@ -29,6 +30,11 @@ class StockDenormalizer implements DenormalizerInterface, DenormalizerAwareInter
             $this->denormalizer->denormalize($data['price'], Money::class),
             new DateTime($data['createdAt'])
         );
+        isset($data['priceUpdateQuota']) && $stock->setPriceUpdateQuota(
+            $this->denormalizer->denormalize($data['priceUpdateQuota'], PriceUpdateQuota::class)
+        );
+
+        return $stock;
     }
 
     public function supportsDenormalization(string $class): bool

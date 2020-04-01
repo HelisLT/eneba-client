@@ -15,6 +15,7 @@ use Helis\EnebaClient\Denormalizer\Object\KeyDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\KeyEdgeDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\MoneyDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\PageInfoDenormalizer;
+use Helis\EnebaClient\Denormalizer\Object\PriceUpdateQuotaDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\ProductConnectionDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\ProductDenormalizer;
 use Helis\EnebaClient\Denormalizer\Object\ProductEdgeDenormalizer;
@@ -64,6 +65,7 @@ class Denormalizer implements DenormalizerInterface
             new KeyDenormalizer(),
             new KeyConnectionDenormalizer(),
             new KeyEdgeDenormalizer(),
+            new PriceUpdateQuotaDenormalizer(),
         ];
     }
 

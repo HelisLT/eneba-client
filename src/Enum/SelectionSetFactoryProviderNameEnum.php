@@ -22,6 +22,7 @@ use MyCLabs\Enum\Enum;
  * @method static static KEY_CONNECTION()
  * @method static static KEY()
  * @method static static COUNT_FEE()
+ * @method static static PRICE_UPDATE_QUOTA()
  */
 class SelectionSetFactoryProviderNameEnum extends Enum
 {
@@ -40,4 +41,5 @@ class SelectionSetFactoryProviderNameEnum extends Enum
     public const KEY_CONNECTION = 'keyConnection';
     public const KEY = 'key';
     public const COUNT_FEE = 'countFee';
+    public const PRICE_UPDATE_QUOTA = 'priceUpdateQuota';
 }

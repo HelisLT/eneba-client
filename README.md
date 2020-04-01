@@ -48,6 +48,14 @@ Returns paginated list of your stock (auctions).
 $stock = $client->getStock();
 ```
 
+### Get single stock (auction) record
+
+Returns single stock model.
+
+```php
+$stock = $client->getSingleStock($stockId);
+```
+
 ### Update auction price
 
 Updates given auction price.

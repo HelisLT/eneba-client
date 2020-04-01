@@ -25,6 +25,10 @@ class StockSelectionSetFactory implements SelectionSetFactoryInterface, Selectio
             new Field('autoRenew'),
             new Field('price', $this->provider->get(SelectionSetFactoryProviderNameEnum::MONEY())->get()),
             new Field('createdAt'),
+            new Field(
+                'priceUpdateQuota',
+                $this->provider->get(SelectionSetFactoryProviderNameEnum::PRICE_UPDATE_QUOTA())->get()
+            ),
         ]);
     }
 }

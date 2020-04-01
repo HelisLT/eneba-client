@@ -19,6 +19,11 @@ class Stock
     private $price;
     private $createdAt;
 
+    /**
+     * @var PriceUpdateQuota|null
+     */
+    private $priceUpdateQuota;
+
     public function __construct(
         UuidInterface $id,
         Product $product,
@@ -84,5 +89,15 @@ class Stock
     public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    public function getPriceUpdateQuota(): ?PriceUpdateQuota
+    {
+        return $this->priceUpdateQuota;
+    }
+
+    public function setPriceUpdateQuota(?PriceUpdateQuota $priceUpdateQuota): void
+    {
+        $this->priceUpdateQuota = $priceUpdateQuota;
     }
 }

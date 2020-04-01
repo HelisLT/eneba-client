@@ -11,6 +11,7 @@ use Helis\EnebaClient\Factory\SelectionSet\ConnectionSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\CountFeeSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\KeySelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\MoneySelectionSetFactory;
+use Helis\EnebaClient\Factory\SelectionSet\PriceUpdateQuotaSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\ProductSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\SalesSelectionSetFactory;
 use Helis\EnebaClient\Factory\SelectionSet\SelectionSetFactoryInterface;
@@ -47,6 +48,7 @@ class SelectionSetFactoryProvider implements SelectionSetFactoryProviderInterfac
             ProviderNameEnum::KEY_CONNECTION => new ConnectionSelectionSetFactory(ProviderNameEnum::KEY()),
             ProviderNameEnum::KEY => new KeySelectionSetFactory(),
             ProviderNameEnum::COUNT_FEE => new CountFeeSelectionSetFactory(),
+            ProviderNameEnum::PRICE_UPDATE_QUOTA => new PriceUpdateQuotaSelectionSetFactory(),
         ];
     }
 

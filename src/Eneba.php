@@ -5,7 +5,7 @@ namespace Helis\EnebaClient;
 
 final class Eneba
 {
-    public const API_CLIENT_VERSION = 1.2;
+    public const API_CLIENT_VERSION = 1.3;
     public const TOKEN_EXPIRATION_TIME_WINDOW = 60;
 
     public const OAUTH_GRANT_TYPE = 'api_consumer';

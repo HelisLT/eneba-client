@@ -24,6 +24,7 @@ use Helis\EnebaClient\Model\Relay\Connection\KeyConnection;
 use Helis\EnebaClient\Model\Relay\Connection\ProductConnection;
 use Helis\EnebaClient\Model\Relay\Connection\SalesConnection;
 use Helis\EnebaClient\Model\Relay\Connection\StockConnection;
+use Helis\EnebaClient\Model\Stock;
 use Helis\EnebaClient\Provider\SelectionSetFactoryProvider;
 use Helis\EnebaClient\Provider\SelectionSetFactoryProviderInterface;
 use Helis\EnebaClient\Storage\AccessTokenStorageInterface;
@@ -134,6 +135,28 @@ class Client implements ClientInterface
         $data = $this->handleResponse($response);
 
         return $this->denormalizer->denormalize($data['data'][Eneba::GQL_STOCK_QUERY], StockConnection::class);
+    }
+
+    public function getSingleStock(UuidInterface $stockId): ?Stock
+    {
+        $query = $this->createConnectionQuery(
+            Eneba::GQL_STOCK_QUERY,
+            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get()
+        );
+
+        $request = $this->createMessage($query->toString(), ['stockId' => $stockId->toString()]);
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        /** @var StockConnection $connection */
+        $connection = $this->denormalizer->denormalize($data['data'][Eneba::GQL_STOCK_QUERY], StockConnection::class);
+
+        if (!isset($connection->getEdges()[0])) {
+            return null;
+        }
+
+        return $connection->getEdges()[0]->getNode();
     }
 
     public function getProducts(?ProductsFilter $filter = null): ProductConnection
