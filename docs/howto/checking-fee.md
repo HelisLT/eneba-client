@@ -30,3 +30,47 @@ Response:
   }
 }
 ```
+
+## For auction price update fee - check STOCK "priceUpdateQuota" field
+
+Request:
+```
+{
+  S_stock(stockId: "ffffffff-6056-11e9-b4ab-ffffffffffff") {
+    edges {
+      node {
+        id
+        priceUpdateQuota {
+          quota
+          nextFreeIn
+          totalFree
+        }
+      }
+    }
+  }
+}
+```
+
+Response:
+```json
+{
+  "data": {
+    "S_stock": {
+      "edges": [
+        {
+          "node": {
+            "id": "ffffffff-6056-11e9-b4ab-ffffffffffff",
+            "priceUpdateQuota": {
+              "quota": 7,
+              "nextFreeIn": null,
+              "totalFree": 7
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+This response means that for that specific auction you have 7 free price updates.
