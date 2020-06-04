@@ -42,7 +42,83 @@ Response:
 }
 ```
 
-## 2. Perform `S_updateAuction` mutation with desired price
+## 2. Check free price update quota
+
+Perform S_stock query with your auction id to retrieve state on price update quota. If no free updates left - you are going to be charged update fee.
+
+Request:
+```
+{
+  S_stock(stockId: "7150b54a-23bc-11e9-9c94-9af5d7d4f046") {
+    edges {
+      node {
+        id
+        priceUpdateQuota {
+          quota
+          nextFreeIn
+          totalFree
+        }
+      }
+    }
+  }
+}
+```
+
+Response:
+```json
+{
+  "data": {
+    "S_stock": {
+      "edges": [
+        {
+          "node": {
+            "id": "7150b54a-23bc-11e9-9c94-9af5d7d4f046",
+            "priceUpdateQuota": {
+              "quota": 7,
+              "nextFreeIn": null,
+              "totalFree": 7
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+[More about checking fees](checking-fee.md)
+
+
+## 3. Check price update fee
+
+Perform T_countFee query with price update type to retrieve price update fee. It only applies if free updates quota exceeded.
+
+Request:
+```
+{
+  T_countFee(type: AUCTION_PRICE_UPDATE) {
+    fee {
+      amount
+      currency
+    }
+  }
+}
+```
+
+Response:
+```json
+{
+  "data": {
+    "T_countFee": {
+      "fee": {
+        "amount": 5,
+        "currency": "EUR"
+      }
+    }
+  }
+}
+```
+
+## 4. Perform `S_updateAuction` mutation with desired price
 
 Pass your desired price and auction ID input value.
 
@@ -73,7 +149,7 @@ Response:
 }
 ```
 
-## 3. Perform `A_action` query to check action status
+## 5. Perform `A_action` query to check action status
 
 Auction update mutation initiates update action and performs it asynchronously.
 You have to poll for actions state to make sure the auction updated successfully. 
