@@ -7,6 +7,22 @@
   * [Mutation](#mutation)
   * [Objects](#objects)
     * [A_Action](#a_action)
+    * [B_API_AffiliateTransaction](#b_api_affiliatetransaction)
+    * [B_API_AuctionEditFeeTransaction](#b_api_auctioneditfeetransaction)
+    * [B_API_CurrencyPair](#b_api_currencypair)
+    * [B_API_DepositTransaction](#b_api_deposittransaction)
+    * [B_API_ExchangeTransaction](#b_api_exchangetransaction)
+    * [B_API_FeeTransaction](#b_api_feetransaction)
+    * [B_API_FundsReleaseFeeTransaction](#b_api_fundsreleasefeetransaction)
+    * [B_API_GiftCardsPurchaseTransaction](#b_api_giftcardspurchasetransaction)
+    * [B_API_NewAuctionFeeTransaction](#b_api_newauctionfeetransaction)
+    * [B_API_PurchaseTransaction](#b_api_purchasetransaction)
+    * [B_API_SaleTransaction](#b_api_saletransaction)
+    * [B_API_TransactionConnection](#b_api_transactionconnection)
+    * [B_API_TransactionEdge](#b_api_transactionedge)
+    * [B_API_WithdrawTransaction](#b_api_withdrawtransaction)
+    * [B_Money](#b_money)
+    * [B_PageInfo](#b_pageinfo)
     * [G_API_GiftCardCode](#g_api_giftcardcode)
     * [G_Money](#g_money)
     * [S_API_Auction](#s_api_auction)
@@ -38,7 +54,12 @@
     * [S_MoneyInput](#s_moneyinput)
   * [Enums](#enums)
     * [A_ActionStateEnum](#a_actionstateenum)
+    * [B_DirectionEnum](#b_directionenum)
+    * [B_FeeType](#b_feetype)
+    * [B_TransactionStatus](#b_transactionstatus)
+    * [B_TransactionType](#b_transactiontype)
     * [G_CodeState](#g_codestate)
+    * [S_API_KeysSort](#s_api_keyssort)
     * [S_API_SellingStatus](#s_api_sellingstatus)
     * [S_KeyFormat](#s_keyformat)
     * [S_KeyState](#s_keystate)
@@ -46,7 +67,11 @@
     * [T_FeeTypeEnum](#t_feetypeenum)
   * [Scalars](#scalars)
     * [A_Uuid](#a_uuid)
+    * [B_Currency](#b_currency)
+    * [B_DateTime](#b_datetime)
+    * [B_Uuid](#b_uuid)
     * [Boolean](#boolean)
+    * [Float](#float)
     * [G_Uuid](#g_uuid)
     * [Int](#int)
     * [S_AvailableCurrencyType](#s_availablecurrencytype)
@@ -54,6 +79,8 @@
     * [S_Uuid](#s_uuid)
     * [String](#string)
     * [T_AvailableCurrencyType](#t_availablecurrencytype)
+  * [Interfaces](#interfaces)
+    * [B_API_TransactionInterface](#b_api_transactioninterface)
 
 </details>
 
@@ -68,6 +95,123 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td colspan="2" valign="top"><strong>B_transactions</strong></td>
+<td valign="top"><a href="#b_api_transactionconnection">B_API_TransactionConnection</a></td>
+<td>
+
+Paginated list of all your transactions
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">after</td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Returns the elements that come after the specified cursor
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">first</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Returns up to the first n elements from the list
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">direction</td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">status</td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">types</td>
+<td valign="top">[<a href="#b_transactiontype">B_TransactionType</a>!]</td>
+<td>
+
+Transaction type. By default returns all types
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">createdFrom</td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Lower date and time range of transactions
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">createdTo</td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Upper date and time range of transaction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">amountMin</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Minimal amount of transaction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">amountMax</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Maximal amount of transaction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">code</td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Transaction number
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">orderNumber</td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Order number
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">referenceName</td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Reference name of transaction
+
+</td>
+</tr>
 <tr>
 <td colspan="2" valign="top"><strong>G_giftCards</strong></td>
 <td valign="top">[<a href="#g_api_giftcardcode">G_API_GiftCardCode</a>!]</td>
@@ -182,6 +326,15 @@ The ID of the stock item
 <td>
 
 The state of keys. If NULL provided - all state keys will be returned
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">sort</td>
+<td valign="top"><a href="#s_api_keyssort">S_API_KeysSort</a></td>
+<td>
+
+Keys sorting option. Default to oldest first
 
 </td>
 </tr>
@@ -447,6 +600,1334 @@ The ID of the action
 <td>
 
 Current action state
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_AffiliateTransaction
+
+Affiliate transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_AuctionEditFeeTransaction
+
+Auction edit transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>feeType</strong></td>
+<td valign="top"><a href="#b_feetype">B_FeeType</a></td>
+<td>
+
+Fee type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>auctionId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Auction ID
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>referenceName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Reference name
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_CurrencyPair
+
+Currency pair details
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>baseCurrency</strong></td>
+<td valign="top"><a href="#b_currency">B_Currency</a></td>
+<td>
+
+Base currency
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>counterCurrency</strong></td>
+<td valign="top"><a href="#b_currency">B_Currency</a></td>
+<td>
+
+Counter currency
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>conversionRatio</strong></td>
+<td valign="top"><a href="#float">Float</a></td>
+<td>
+
+Conversation ratio
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_DepositTransaction
+
+Deposit transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_ExchangeTransaction
+
+Money exchange transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>currencyPair</strong></td>
+<td valign="top"><a href="#b_api_currencypair">B_API_CurrencyPair</a></td>
+<td>
+
+Currency exchange details
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_FeeTransaction
+
+Fee transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>feeType</strong></td>
+<td valign="top"><a href="#b_feetype">B_FeeType</a></td>
+<td>
+
+Fee type
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_FundsReleaseFeeTransaction
+
+Funds release fee transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>feeType</strong></td>
+<td valign="top"><a href="#b_feetype">B_FeeType</a></td>
+<td>
+
+Fee type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>referenceName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Reference name
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>receivedMoney</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Received money
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_GiftCardsPurchaseTransaction
+
+Gift cards purchase transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>batchName</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+Gift cards batch name
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_NewAuctionFeeTransaction
+
+New auction fee transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>feeType</strong></td>
+<td valign="top"><a href="#b_feetype">B_FeeType</a></td>
+<td>
+
+Fee type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>auctionId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Auction ID
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_PurchaseTransaction
+
+Purchase transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>orderNumber</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Associated order number
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_SaleTransaction
+
+Sale transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>orderNumber</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Associated order number
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>presale</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>referenceName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Reference name
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_TransactionConnection
+
+A connection to a list of items.
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>totalCount</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Total connections count
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>pageInfo</strong></td>
+<td valign="top"><a href="#b_pageinfo">B_PageInfo</a>!</td>
+<td>
+
+Information to aid in pagination.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>edges</strong></td>
+<td valign="top">[<a href="#b_api_transactionedge">B_API_TransactionEdge</a>]</td>
+<td>
+
+Information to aid in pagination.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_TransactionEdge
+
+An edge in a connection.
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>node</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+The item at the end of the edge.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>cursor</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+A cursor for use in pagination.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_WithdrawTransaction
+
+Withdraw transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>invoiceUrl</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Withdraw invoice URL
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_Money
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>amount</strong></td>
+<td valign="top"><a href="#int">Int</a>!</td>
+<td>
+
+Money amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>currency</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+Money currency code
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_PageInfo
+
+Information about pagination in a connection.
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>hasNextPage</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+When paginating forwards, are there more items?
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>hasPreviousPage</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+When paginating backwards, are there more items?
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>startCursor</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+When paginating backwards, the cursor to continue.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>endCursor</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+When paginating forwards, the cursor to continue.
 
 </td>
 </tr>
@@ -1204,6 +2685,24 @@ Keys sold in this sale
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>keysFileNames</strong></td>
+<td valign="top">[<a href="#string">String</a>]</td>
+<td>
+
+Sold keys file names, NULL if key is not a file
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>formattedOrderNumber</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Order number associated with this sale
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -1327,6 +2826,15 @@ Amount of keys sold
 <td>
 
 Amount of keys in stock
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>onHold</strong></td>
+<td valign="top"><a href="#int">Int</a>!</td>
+<td>
+
+Amount of keys on hold
 
 </td>
 </tr>
@@ -1818,6 +3326,146 @@ Money currency code
 </tbody>
 </table>
 
+### B_DirectionEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>IN</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>OUT</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### B_FeeType
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>AUCTION_NEW</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>AUCTION_EDIT</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>AUCTION_RENEW</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>WALLET_WITHDRAW</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>WALLET_CONVERSION</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>FUNDS_RELEASE</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### B_TransactionStatus
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>PENDING</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>ON_HOLD</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>CANCELED</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>COMPLETE</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### B_TransactionType
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>DEPOSIT</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>WITHDRAW</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>PURCHASE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>GIFT_CARDS_PURCHASE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>EXCHANGE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>SALE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>AFFILIATE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>FEE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>NEW_AUCTION_FEE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>AUCTION_EDIT_FEE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>AUCTION_RENEW_FEE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>FUNDS_RELEASE_FEE</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 ### G_CodeState
 
 <table>
@@ -1836,6 +3484,43 @@ Money currency code
 </tr>
 <tr>
 <td valign="top"><strong>USED</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### S_API_KeysSort
+
+Keys sorting options
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>STATE_ASC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>STATE_DESC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>CREATED_AT_ASC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>CREATED_AT_DESC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>SOLD_AT_ASC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>SOLD_AT_DESC</strong></td>
 <td></td>
 </tr>
 </tbody>
@@ -2042,6 +3727,10 @@ Available platforms in marketplace
 <td valign="top"><strong>NINTENDO_SWITCH</strong></td>
 <td></td>
 </tr>
+<tr>
+<td valign="top"><strong>WINDOWS_STORE</strong></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
@@ -2082,9 +3771,25 @@ Available platforms in marketplace
 
 Uuid value in hex, formatted 8-4-4-4-12
 
+### B_Currency
+
+Refers to money in any form
+
+### B_DateTime
+
+Holds date time value
+
+### B_Uuid
+
+Uuid value in hex, formatted 8-4-4-4-12
+
 ### Boolean
 
 The `Boolean` scalar type represents `true` or `false`.
+
+### Float
+
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 
 ### G_Uuid
 
@@ -2110,3 +3815,93 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 
 ### T_AvailableCurrencyType
 
+
+## Interfaces
+
+
+### B_API_TransactionInterface
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+</tbody>
+</table>

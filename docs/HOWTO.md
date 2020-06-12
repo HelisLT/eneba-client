@@ -7,3 +7,4 @@
 - [Managing the stock of your auction](howto/manage-stock.md)
 - [Getting your sales report](howto/get-sales-report.md)
 - [Tracking reported keys](howto/get-auctions-keys.md#get-your-auctions-reported-keys-using-s_keys)
+- [Get balance transactions](howto/get-balance-transactions.md)

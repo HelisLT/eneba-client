@@ -1,5 +1,7 @@
 # How to get sales report
 
+> :warning: **This method deprecated and might return unexpected results. Check sales by using [transactions query](get-balance-transactions.md).**
+
 You can get all your sales by using `S_sales` query, it allows simple filtering of sales.
 
 ## Perform `S_sales` to get report
