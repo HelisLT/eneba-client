@@ -78,3 +78,46 @@ Response:
   }
 }
 ```
+
+## Get keys by IDs using `S_keys`
+
+Request:
+```
+{
+  S_keys(ids: [ "1bd07056-ffff-11ab-eeee-295c93cf53bd", "ggggc3f0-7260-1cee-ac76-eeee38eff69b" ]) {
+    edges {
+      node {
+        id
+        value
+        state
+      }
+    }
+  }
+}
+```
+
+Response:
+```json
+{
+  "data": {
+    "S_keys": {
+      "edges": [
+        {
+          "node": {
+            "id": "1bd07056-ffff-11ab-eeee-295c93cf53bd",
+            "value": "first-key",
+            "state": "SOLD"
+          }
+        },
+        {
+          "node": {
+            "id": "ggggc3f0-7260-1cee-ac76-eeee38eff69b",
+            "value": "second-key",
+            "state": "SOLD"
+          }
+        }
+      ]
+    }
+  }
+}
+```

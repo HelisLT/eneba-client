@@ -20,6 +20,8 @@ You can filter transactions by type:
 
 ### To get completed sales transactions perform `B_transactions` with `SALE` type
 
+To get underlying key code pass `keyId` to `S_Keys` query: [get keys by IDs](get-auctions-keys.md#get-keys-by-ids-using-s_keys)
+
 Request:
 ```
 {
@@ -37,6 +39,7 @@ Request:
           orderNumber
           presale
           referenceName
+          keyId
         }
         code
         type
@@ -73,6 +76,7 @@ Response:
             "orderNumber": "o-XXXXXX",
             "presale": false,
             "referenceName": "F1 2018 - Headline Content Pack (DLC) Steam Key EUROPE",
+            "keyId": "ffffkkkk-c5a7-11e9-a466-ffffffffffff",
             "code": "t-YYYYYY",
             "type": "SALE",
             "status": "COMPLETE",
@@ -90,6 +94,7 @@ Response:
             "orderNumber": "o-XXXXXX",
             "presale": false,
             "referenceName": "Playstation Plus Card 90 days (DK) PSN Key DENMARK",
+            "keyId": "ffffkkkk-c5a7-11e9-addd-ffffffffffff",
             "code": "t-YYYYYY",
             "type": "SALE",
             "status": "COMPLETE",
@@ -107,6 +112,7 @@ Response:
             "orderNumber": "o-XXXXXX",
             "presale": false,
             "referenceName": "F1 2018 - Headline Content Pack (DLC) Steam Key EUROPE",
+            "keyId": "ffffkkkk-c5a7-11e9-aeee-ffffffffffff",
             "code": "t-YYYYYY",
             "type": "SALE",
             "status": "COMPLETE",
@@ -124,6 +130,7 @@ Response:
             "orderNumber": "o-XXXXXX",
             "presale": false,
             "referenceName": "F1 2018 - Headline Content Pack (DLC) Steam Key EUROPE",
+            "keyId": "ffffkkkk-c5a7-11e9-b2cc-ffffffffffff",
             "code": "t-YYYYYY",
             "type": "SALE",
             "status": "COMPLETE",
@@ -141,6 +148,7 @@ Response:
             "orderNumber": "o-XXXXXX",
             "presale": false,
             "referenceName": "F1 2018 - Headline Content Pack (DLC) Steam Key EUROPE",
+            "keyId": "ffffkkkk-c5a7-11e9-a213-ffffffffffff",
             "code": "t-YYYYYY",
             "type": "SALE",
             "status": "COMPLETE",
