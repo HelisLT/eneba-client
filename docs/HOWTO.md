@@ -9,3 +9,4 @@
 - [Tracking reported keys](howto/get-auctions-keys.md#get-your-auctions-reported-keys-using-s_keys)
 - [Get balance transactions](howto/get-balance-transactions.md)
 - [Get unmapped products](howto/get-unmapped-products.md)
+- [Get create auction (stock)](howto/create-auction.md)
