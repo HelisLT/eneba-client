@@ -8,4 +8,4 @@
 
 [PHP client](docs/PHP.md)
 
-[How To](docs/HOWTO.md)
+[How To](docs/howto/README.md)

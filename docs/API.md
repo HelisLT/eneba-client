@@ -28,6 +28,7 @@
     * [S_API_Auction](#s_api_auction)
     * [S_API_AuctionConnection](#s_api_auctionconnection)
     * [S_API_AuctionEdge](#s_api_auctionedge)
+    * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
     * [S_API_Key](#s_api_key)
     * [S_API_KeyConnection](#s_api_keyconnection)
     * [S_API_KeyEdge](#s_api_keyedge)
@@ -49,6 +50,7 @@
     * [T_CountFeeResponse](#t_countfeeresponse)
     * [T_Money](#t_money)
   * [Inputs](#inputs)
+    * [S_API_CreateAuctionInput](#s_api_createauctioninput)
     * [S_API_PurchaseGiftCardsInput](#s_api_purchasegiftcardsinput)
     * [S_API_UpdateAuctionInput](#s_api_updateauctioninput)
     * [S_MoneyInput](#s_moneyinput)
@@ -285,6 +287,15 @@ The ID of the stock. If NULL provided - all auctions will be returned
 </td>
 </tr>
 <tr>
+<td colspan="2" align="right" valign="top">productId</td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a></td>
+<td>
+
+The ID of the associated product. If NULL provided - all auctions will be returned
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>S_keys</strong></td>
 <td valign="top"><a href="#s_api_keyconnection">S_API_KeyConnection</a></td>
 <td>
@@ -313,10 +324,10 @@ Returns up to the first n elements from the list
 </tr>
 <tr>
 <td colspan="2" align="right" valign="top">stockId</td>
-<td valign="top"><a href="#s_uuid">S_Uuid</a>!</td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a></td>
 <td>
 
-The ID of the stock item
+The ID of the stock item. Either this argument or "ids" is required.
 
 </td>
 </tr>
@@ -335,6 +346,15 @@ The state of keys. If NULL provided - all state keys will be returned
 <td>
 
 Keys sorting option. Default to oldest first
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">ids</td>
+<td valign="top">[<a href="#s_uuid">S_Uuid</a>!]</td>
+<td>
+
+IDs of requested keys. Either this argument or "stockId" is required.
 
 </td>
 </tr>
@@ -380,6 +400,24 @@ Returns the elements that come before the specified cursor
 <td>
 
 Returns up to the last n elements from the list
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">onlyUnmapped</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+Returns only unmapped products
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">search</td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Search phrase for product name
 
 </td>
 </tr>
@@ -565,6 +603,24 @@ Initiate gift cards purchase
 <td>
 
 Gift cards purchase details
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>S_createAuction</strong></td>
+<td valign="top"><a href="#s_api_createauctionresponse">S_API_CreateAuctionResponse</a></td>
+<td>
+
+Initiate creation of the auction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">input</td>
+<td valign="top"><a href="#s_api_createauctioninput">S_API_CreateAuctionInput</a>!</td>
+<td>
+
+Auction creation data
 
 </td>
 </tr>
@@ -1668,6 +1724,15 @@ Reference name
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>keyId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Sold key id
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -2129,6 +2194,35 @@ The item at the end of the edge.
 <td>
 
 A cursor for use in pagination.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### S_API_CreateAuctionResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>actionId</strong></td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a></td>
+<td>
+
+Initiated action ID used to check current state of the action
 
 </td>
 </tr>
@@ -3186,6 +3280,83 @@ Money currency code
 </table>
 
 ## Inputs
+
+### S_API_CreateAuctionInput
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>keys</strong></td>
+<td valign="top">[<a href="#string">String</a>!]</td>
+<td>
+
+New text keys. Required if auction is not a preorder
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>enabled</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+The state of auction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>autoRenew</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+Should auction be auto renewed
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>productId</strong></td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a>!</td>
+<td>
+
+The ID of the associated product
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>price</strong></td>
+<td valign="top"><a href="#s_moneyinput">S_MoneyInput</a>!</td>
+<td>
+
+Auction price
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>acquisitionPrice</strong></td>
+<td valign="top"><a href="#s_moneyinput">S_MoneyInput</a></td>
+<td>
+
+Keys acquisition price. Used for profit calculations
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>onHand</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Keys counter for pre-order
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ### S_API_PurchaseGiftCardsInput
 
