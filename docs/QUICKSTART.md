@@ -12,10 +12,15 @@ If you have any questions regarding the integration, please contact [integration
 
 You can either use provided [PHP Client](PHP.md) or write your implementation.
 
-## Endpoints
+## Production endpoints
 
 - GraphQL endpoint: https://api.eneba.com/
 - OAuth endpoint: https://user.eneba.com/oauth/token (oauth client ID: `917611c2-70a5-11e9-97c4-46691b78bfa2`)
+
+## Sandbox endpoints
+
+- GraphQL endpoint: https://api-sandbox.eneba.com/graphql/
+- OAuth endpoint: https://api-sandbox.eneba.com/oauth/token (oauth client ID: `917611c2-70a5-11e9-00c4-ee691bb8bfaa`)
 
 ## Where to go next?
 
