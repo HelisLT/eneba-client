@@ -27,8 +27,8 @@ class ProductSelectionSetFactory implements SelectionSetFactoryInterface, Select
             new Field('name'),
             new Field('slug'),
             new Field('platform', new SelectionSet([
-                new Field('name'),
-                new Field('enum'),
+                new Field('label'),
+                new Field('value'),
             ])),
             new Field('releasedAt'),
         ]);
