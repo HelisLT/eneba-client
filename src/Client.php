@@ -141,8 +141,12 @@ class Client implements ClientInterface
     {
         $query = $this->createConnectionQuery(
             Eneba::GQL_STOCK_QUERY,
-            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get()
-        );
+            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get(),
+            [
+                'stockId' => new VariableValue('$stockId'),
+            ]
+        )
+            ->addVariable(new ScalarVariable('$stockId', 'S_Uuid'));
 
         $request = $this->createMessage($query->toString(), ['stockId' => $stockId->toString()]);
 
@@ -163,12 +167,20 @@ class Client implements ClientInterface
     {
         $query = $this->createConnectionQuery(
             Eneba::GQL_PRODUCTS_QUERY,
-            $this->selectionSetFactoryProvider->get(ProviderNameEnum::PRODUCT_CONNECTION())->get()
-        );
+            $this->selectionSetFactoryProvider->get(ProviderNameEnum::PRODUCT_CONNECTION())->get(),
+            [
+                'onlyUnmapped' => new VariableValue('$onlyUnmapped'),
+                'search' => new VariableValue('$search'),
+            ]
+        )
+            ->addVariable(new ScalarVariable('$onlyUnmapped', 'Boolean'))
+            ->addVariable(new ScalarVariable('$search', 'String'));
 
         $request = $this->createMessage($query->toString(), $filter ? [
             'cursor' => $this->generateCursor($filter->getPage(), $filter->getPerPage()),
             'limit' => $filter->getPerPage(),
+            'onlyUnmapped' => $filter->getOnlyUnmapped(),
+            'search' => $filter->getSearch(),
         ] : []);
 
         $response = $this->client->sendRequest($request);
@@ -512,7 +524,7 @@ class Client implements ClientInterface
             return null;
         }
 
-        return base64_encode('arrayconnection:' . ($page - 1) * $perPage);
+        return base64_encode('arrayconnection:' . (($page - 1) * $perPage - (int)($page > 1)));
     }
 
     private function createMessage(string $query, array $variables = []): RequestInterface
