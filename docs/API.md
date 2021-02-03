@@ -3,9 +3,9 @@
 <details>
   <summary><strong>Table of Contents</strong></summary>
 
-  * [Query](#query)
-  * [Mutation](#mutation)
-  * [Objects](#objects)
+* [Query](#query)
+* [Mutation](#mutation)
+* [Objects](#objects)
     * [A_Action](#a_action)
     * [B_API_AffiliateTransaction](#b_api_affiliatetransaction)
     * [B_API_AuctionEditFeeTransaction](#b_api_auctioneditfeetransaction)
@@ -16,29 +16,29 @@
     * [B_API_FundsReleaseFeeTransaction](#b_api_fundsreleasefeetransaction)
     * [B_API_GiftCardsPurchaseTransaction](#b_api_giftcardspurchasetransaction)
     * [B_API_NewAuctionFeeTransaction](#b_api_newauctionfeetransaction)
-    * [B_API_PurchaseTransaction](#b_api_purchasetransaction)
-    * [B_API_SaleTransaction](#b_api_saletransaction)
-    * [B_API_TransactionConnection](#b_api_transactionconnection)
-    * [B_API_TransactionEdge](#b_api_transactionedge)
-    * [B_API_WithdrawTransaction](#b_api_withdrawtransaction)
-    * [B_Money](#b_money)
-    * [B_PageInfo](#b_pageinfo)
-    * [G_API_GiftCardCode](#g_api_giftcardcode)
-    * [G_Money](#g_money)
-    * [S_API_Auction](#s_api_auction)
-    * [S_API_AuctionConnection](#s_api_auctionconnection)
-    * [S_API_AuctionEdge](#s_api_auctionedge)
-    * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
-    * [S_API_Key](#s_api_key)
-    * [S_API_KeyConnection](#s_api_keyconnection)
-    * [S_API_KeyEdge](#s_api_keyedge)
-    * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
-    * [S_API_Product](#s_api_product)
-    * [S_API_ProductConnection](#s_api_productconnection)
-    * [S_API_ProductEdge](#s_api_productedge)
-    * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
-    * [S_API_Sales](#s_api_sales)
-    * [S_API_SalesConnection](#s_api_salesconnection)
+        * [B_API_PurchaseTransaction](#b_api_purchasetransaction)
+        * [B_API_SaleTransaction](#b_api_saletransaction)
+        * [B_API_TransactionConnection](#b_api_transactionconnection)
+        * [B_API_TransactionEdge](#b_api_transactionedge)
+        * [B_API_WithdrawTransaction](#b_api_withdrawtransaction)
+        * [B_Money](#b_money)
+        * [B_PageInfo](#b_pageinfo)
+        * [G_API_GiftCardCode](#g_api_giftcardcode)
+        * [G_Money](#g_money)
+        * [S_API_Auction](#s_api_auction)
+        * [S_API_AuctionConnection](#s_api_auctionconnection)
+        * [S_API_AuctionEdge](#s_api_auctionedge)
+        * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
+        * [S_API_Key](#s_api_key)
+        * [S_API_KeyConnection](#s_api_keyconnection)
+        * [S_API_KeyEdge](#s_api_keyedge)
+        * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
+        * [S_API_Product](#s_api_product)
+        * [S_API_ProductConnection](#s_api_productconnection)
+        * [S_API_ProductEdge](#s_api_productedge)
+        * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
+        * [S_API_Sales](#s_api_sales)
+        * [S_API_SalesConnection](#s_api_salesconnection)
     * [S_API_SalesEdge](#s_api_salesedge)
     * [S_API_Stock](#s_api_stock)
     * [S_API_StockConnection](#s_api_stockconnection)
@@ -49,13 +49,14 @@
     * [S_PlatformEnumValue](#s_platformenumvalue)
     * [T_CountFeeResponse](#t_countfeeresponse)
     * [T_Money](#t_money)
-  * [Inputs](#inputs)
+* [Inputs](#inputs)
     * [S_API_CreateAuctionInput](#s_api_createauctioninput)
     * [S_API_PurchaseGiftCardsInput](#s_api_purchasegiftcardsinput)
     * [S_API_UpdateAuctionInput](#s_api_updateauctioninput)
     * [S_MoneyInput](#s_moneyinput)
-  * [Enums](#enums)
+* [Enums](#enums)
     * [A_ActionStateEnum](#a_actionstateenum)
+    * [B_API_TransactionsSort](#b_api_transactionssort)
     * [B_DirectionEnum](#b_directionenum)
     * [B_FeeType](#b_feetype)
     * [B_TransactionStatus](#b_transactionstatus)
@@ -67,26 +68,28 @@
     * [S_KeyState](#s_keystate)
     * [S_Platform](#s_platform)
     * [T_FeeTypeEnum](#t_feetypeenum)
-  * [Scalars](#scalars)
+* [Scalars](#scalars)
     * [A_Uuid](#a_uuid)
     * [B_Currency](#b_currency)
     * [B_DateTime](#b_datetime)
     * [B_Uuid](#b_uuid)
     * [Boolean](#boolean)
+    * [DateTime](#datetime)
     * [Float](#float)
     * [G_Uuid](#g_uuid)
+    * [ID](#id)
     * [Int](#int)
-    * [S_AvailableCurrencyType](#s_availablecurrencytype)
     * [S_DateTime](#s_datetime)
     * [S_Uuid](#s_uuid)
     * [String](#string)
     * [T_AvailableCurrencyType](#t_availablecurrencytype)
-  * [Interfaces](#interfaces)
+* [Interfaces](#interfaces)
     * [B_API_TransactionInterface](#b_api_transactioninterface)
 
 </details>
 
 ## Query
+
 <table>
 <thead>
 <tr>
@@ -215,6 +218,15 @@ Reference name of transaction
 </td>
 </tr>
 <tr>
+<td colspan="2" align="right" valign="top">sort</td>
+<td valign="top"><a href="#b_api_transactionssort">B_API_TransactionsSort</a></td>
+<td>
+
+Transactions sorting option. Default to oldest first
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>G_giftCards</strong></td>
 <td valign="top">[<a href="#g_api_giftcardcode">G_API_GiftCardCode</a>!]</td>
 <td>
@@ -327,7 +339,7 @@ Returns up to the first n elements from the list
 <td valign="top"><a href="#s_uuid">S_Uuid</a></td>
 <td>
 
-The ID of the stock item. Either this argument or "ids" is required.
+The ID of the stock item. Either this argument, "stockId" or "orderNumber" is required.
 
 </td>
 </tr>
@@ -354,7 +366,16 @@ Keys sorting option. Default to oldest first
 <td valign="top">[<a href="#s_uuid">S_Uuid</a>!]</td>
 <td>
 
-IDs of requested keys. Either this argument or "stockId" is required.
+IDs of requested keys. Either this argument, "stockId" or "orderNumber" is required.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">orderNumber</td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Associated order number. Either this argument, "stockId" or "orderNumber" is required.
 
 </td>
 </tr>
@@ -409,6 +430,15 @@ Returns up to the last n elements from the list
 <td>
 
 Returns only unmapped products
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">createdSince</td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td>
+
+Returns products created since given date
 
 </td>
 </tr>
@@ -560,6 +590,7 @@ Fee type
 </table>
 
 ## Mutation
+
 <table>
 <thead>
 <tr>
@@ -2096,11 +2127,6 @@ Current auction price
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right" valign="top">currency</td>
-<td valign="top"><a href="#s_availablecurrencytype">S_AvailableCurrencyType</a></td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>isInStock</strong></td>
 <td valign="top"><a href="#boolean">Boolean</a>!</td>
 <td>
@@ -2340,6 +2366,15 @@ Defines if key can be deleted or not
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>stock</strong></td>
+<td valign="top"><a href="#s_api_stock">S_API_Stock</a>!</td>
+<td>
+
+Stock associated with that particular key
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -2518,6 +2553,15 @@ Product platform
 <td>
 
 Product release date
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a>!</td>
+<td>
+
+Product creation date
 
 </td>
 </tr>
@@ -3420,6 +3464,15 @@ Auction price
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>acquisitionPrice</strong></td>
+<td valign="top"><a href="#s_moneyinput">S_MoneyInput</a></td>
+<td>
+
+Keys acquisition price. Used for profit calculations
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>addedKeys</strong></td>
 <td valign="top">[<a href="#string">String</a>!]</td>
 <td>
@@ -3434,6 +3487,24 @@ Added keys in plain (text) format
 <td>
 
 IDs of removed keys
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>enabled</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+The state of auction. Leave this field empty if not updating it.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>autoRenew</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+Should auction be auto renewed. Leave this field empty if not updating it.
 
 </td>
 </tr>
@@ -3492,6 +3563,27 @@ Money currency code
 </tr>
 <tr>
 <td valign="top"><strong>FAILED</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### B_API_TransactionsSort
+
+Transactions sorting options
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>CREATED_AT_ASC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>CREATED_AT_DESC</strong></td>
 <td></td>
 </tr>
 </tbody>
@@ -3958,19 +4050,30 @@ Uuid value in hex, formatted 8-4-4-4-12
 
 The `Boolean` scalar type represents `true` or `false`.
 
+### DateTime
+
+Holds date time value
+
 ### Float
 
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+The `Float` scalar type represents signed double-precision fractional values as specified by
+[IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 
 ### G_Uuid
 
 Uuid value in hex, formatted 8-4-4-4-12
 
+### ID
+
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type
+appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input
+type, any string (such as `"4"`) or integer
+(such as `4`) input value will be accepted as an ID.
+
 ### Int
 
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-
-### S_AvailableCurrencyType
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31)
+and 2^31 - 1.
 
 ### S_DateTime
 
@@ -3982,13 +4085,12 @@ Uuid value in hex, formatted 8-4-4-4-12
 
 ### String
 
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most
+often used by GraphQL to represent free-form human-readable text.
 
 ### T_AvailableCurrencyType
 
-
 ## Interfaces
-
 
 ### B_API_TransactionInterface
 
