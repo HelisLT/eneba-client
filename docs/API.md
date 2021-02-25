@@ -1,4 +1,4 @@
-# Eneba GraphQL - Schema Types
+# Schema Types
 
 <details>
   <summary><strong>Table of Contents</strong></summary>
@@ -7,7 +7,9 @@
 * [Mutation](#mutation)
 * [Objects](#objects)
     * [A_Action](#a_action)
+    * [B_API_AdminManualFundsTransaction](#b_api_adminmanualfundstransaction)
     * [B_API_AffiliateTransaction](#b_api_affiliatetransaction)
+    * [B_API_AuctionCampaignFeeTransaction](#b_api_auctioncampaignfeetransaction)
     * [B_API_AuctionEditFeeTransaction](#b_api_auctioneditfeetransaction)
     * [B_API_CurrencyPair](#b_api_currencypair)
     * [B_API_DepositTransaction](#b_api_deposittransaction)
@@ -16,29 +18,30 @@
     * [B_API_FundsReleaseFeeTransaction](#b_api_fundsreleasefeetransaction)
     * [B_API_GiftCardsPurchaseTransaction](#b_api_giftcardspurchasetransaction)
     * [B_API_NewAuctionFeeTransaction](#b_api_newauctionfeetransaction)
-        * [B_API_PurchaseTransaction](#b_api_purchasetransaction)
-        * [B_API_SaleTransaction](#b_api_saletransaction)
-        * [B_API_TransactionConnection](#b_api_transactionconnection)
-        * [B_API_TransactionEdge](#b_api_transactionedge)
-        * [B_API_WithdrawTransaction](#b_api_withdrawtransaction)
-        * [B_Money](#b_money)
-        * [B_PageInfo](#b_pageinfo)
-        * [G_API_GiftCardCode](#g_api_giftcardcode)
-        * [G_Money](#g_money)
-        * [S_API_Auction](#s_api_auction)
-        * [S_API_AuctionConnection](#s_api_auctionconnection)
-        * [S_API_AuctionEdge](#s_api_auctionedge)
-        * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
-        * [S_API_Key](#s_api_key)
-        * [S_API_KeyConnection](#s_api_keyconnection)
-        * [S_API_KeyEdge](#s_api_keyedge)
-        * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
-        * [S_API_Product](#s_api_product)
-        * [S_API_ProductConnection](#s_api_productconnection)
-        * [S_API_ProductEdge](#s_api_productedge)
-        * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
-        * [S_API_Sales](#s_api_sales)
-        * [S_API_SalesConnection](#s_api_salesconnection)
+    * [B_API_PartialItemRefundTransaction](#b_api_partialitemrefundtransaction)
+    * [B_API_PurchaseTransaction](#b_api_purchasetransaction)
+    * [B_API_SaleTransaction](#b_api_saletransaction)
+    * [B_API_TransactionConnection](#b_api_transactionconnection)
+    * [B_API_TransactionEdge](#b_api_transactionedge)
+    * [B_API_WithdrawTransaction](#b_api_withdrawtransaction)
+    * [B_Money](#b_money)
+    * [B_PageInfo](#b_pageinfo)
+    * [G_API_GiftCardCode](#g_api_giftcardcode)
+    * [G_Money](#g_money)
+    * [S_API_Auction](#s_api_auction)
+    * [S_API_AuctionConnection](#s_api_auctionconnection)
+    * [S_API_AuctionEdge](#s_api_auctionedge)
+    * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
+    * [S_API_Key](#s_api_key)
+    * [S_API_KeyConnection](#s_api_keyconnection)
+    * [S_API_KeyEdge](#s_api_keyedge)
+    * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
+    * [S_API_Product](#s_api_product)
+    * [S_API_ProductConnection](#s_api_productconnection)
+    * [S_API_ProductEdge](#s_api_productedge)
+    * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
+    * [S_API_Sales](#s_api_sales)
+    * [S_API_SalesConnection](#s_api_salesconnection)
     * [S_API_SalesEdge](#s_api_salesedge)
     * [S_API_Stock](#s_api_stock)
     * [S_API_StockConnection](#s_api_stockconnection)
@@ -63,10 +66,12 @@
     * [B_TransactionType](#b_transactiontype)
     * [G_CodeState](#g_codestate)
     * [S_API_KeysSort](#s_api_keyssort)
+    * [S_API_ProductsSort](#s_api_productssort)
     * [S_API_SellingStatus](#s_api_sellingstatus)
     * [S_KeyFormat](#s_keyformat)
     * [S_KeyState](#s_keystate)
     * [S_Platform](#s_platform)
+    * [S_RelationEnum](#s_relationenum)
     * [T_FeeTypeEnum](#t_feetypeenum)
 * [Scalars](#scalars)
     * [A_Uuid](#a_uuid)
@@ -74,11 +79,10 @@
     * [B_DateTime](#b_datetime)
     * [B_Uuid](#b_uuid)
     * [Boolean](#boolean)
-    * [DateTime](#datetime)
     * [Float](#float)
     * [G_Uuid](#g_uuid)
-    * [ID](#id)
     * [Int](#int)
+    * [S_AvailableCurrencyType](#s_availablecurrencytype)
     * [S_DateTime](#s_datetime)
     * [S_Uuid](#s_uuid)
     * [String](#string)
@@ -366,7 +370,7 @@ Keys sorting option. Default to oldest first
 <td valign="top">[<a href="#s_uuid">S_Uuid</a>!]</td>
 <td>
 
-IDs of requested keys. Either this argument, "stockId" or "orderNumber" is required.
+IDs of requested keys. Either this argument, "stockId", "orderNumber" or "ordersNumbers" is required.
 
 </td>
 </tr>
@@ -375,7 +379,16 @@ IDs of requested keys. Either this argument, "stockId" or "orderNumber" is requi
 <td valign="top"><a href="#string">String</a></td>
 <td>
 
-Associated order number. Either this argument, "stockId" or "orderNumber" is required.
+Associated order number. Either this argument, "stockId", "ordersNumbers" or "ids" is required.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">ordersNumbers</td>
+<td valign="top">[<a href="#string">String</a>!]</td>
+<td>
+
+Associated orders numbers. Either this argument, "stockId", "orderNumber" or "ids" is required.
 
 </td>
 </tr>
@@ -435,7 +448,7 @@ Returns only unmapped products
 </tr>
 <tr>
 <td colspan="2" align="right" valign="top">createdSince</td>
-<td valign="top"><a href="#datetime">DateTime</a></td>
+<td valign="top"><a href="#s_datetime">S_DateTime</a></td>
 <td>
 
 Returns products created since given date
@@ -448,6 +461,15 @@ Returns products created since given date
 <td>
 
 Search phrase for product name
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">sort</td>
+<td valign="top"><a href="#s_api_productssort">S_API_ProductsSort</a></td>
+<td>
+
+Products sorting option
 
 </td>
 </tr>
@@ -693,6 +715,98 @@ Current action state
 </tbody>
 </table>
 
+### B_API_AdminManualFundsTransaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>adminId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 ### B_API_AffiliateTransaction
 
 Affiliate transaction
@@ -776,6 +890,120 @@ Transaction which is being reverted by current transaction.
 <td>
 
 Transaction creation date and time
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_AuctionCampaignFeeTransaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>orderNumber</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Associated order number
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>referenceName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Reference name
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>keyId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Sold key id
 
 </td>
 </tr>
@@ -1548,6 +1776,93 @@ Auction ID
 </tbody>
 </table>
 
+### B_API_PartialItemRefundTransaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### B_API_PurchaseTransaction
 
 Purchase transaction
@@ -2127,6 +2442,11 @@ Current auction price
 </td>
 </tr>
 <tr>
+<td colspan="2" align="right" valign="top">currency</td>
+<td valign="top"><a href="#s_availablecurrencytype">S_AvailableCurrencyType</a></td>
+<td></td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>isInStock</strong></td>
 <td valign="top"><a href="#boolean">Boolean</a>!</td>
 <td>
@@ -2167,6 +2487,15 @@ A connection to a list of items.
 <td>
 
 Total connections count
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>totalCountRelation</strong></td>
+<td valign="top"><a href="#s_relationenum">S_RelationEnum</a></td>
+<td>
+
+Connections count relation
 
 </td>
 </tr>
@@ -2239,9 +2568,21 @@ A cursor for use in pagination.
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong>isSuccessful</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
 <td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong> ⚠️</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+<p>⚠️ <strong>DEPRECATED</strong></p>
+<blockquote>
+
+Use success instead
+
+</blockquote>
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>actionId</strong></td>
@@ -2402,6 +2743,15 @@ Total connections count
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>totalCountRelation</strong></td>
+<td valign="top"><a href="#s_relationenum">S_RelationEnum</a></td>
+<td>
+
+Connections count relation
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>pageInfo</strong></td>
 <td valign="top"><a href="#s_pageinfo">S_PageInfo</a>!</td>
 <td>
@@ -2549,7 +2899,7 @@ Product platform
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>releasedAt</strong></td>
-<td valign="top"><a href="#s_datetime">S_DateTime</a>!</td>
+<td valign="top"><a href="#s_datetime">S_DateTime</a></td>
 <td>
 
 Product release date
@@ -2558,7 +2908,7 @@ Product release date
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>createdAt</strong></td>
-<td valign="top"><a href="#datetime">DateTime</a>!</td>
+<td valign="top"><a href="#s_datetime">S_DateTime</a>!</td>
 <td>
 
 Product creation date
@@ -2610,6 +2960,15 @@ Returns up to the last n elements from the list
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSellable</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+Indicates if product is available for selling
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -2633,6 +2992,15 @@ A connection to a list of items.
 <td>
 
 Total connections count
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>totalCountRelation</strong></td>
+<td valign="top"><a href="#s_relationenum">S_RelationEnum</a></td>
+<td>
+
+Connections count relation
 
 </td>
 </tr>
@@ -2705,9 +3073,21 @@ A cursor for use in pagination.
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong>isSuccessful</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
 <td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong> ⚠️</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+<p>⚠️ <strong>DEPRECATED</strong></p>
+<blockquote>
+
+Use success instead
+
+</blockquote>
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>actionId</strong></td>
@@ -2864,6 +3244,15 @@ A connection to a list of items.
 <td>
 
 Total connections count
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>totalCountRelation</strong></td>
+<td valign="top"><a href="#s_relationenum">S_RelationEnum</a></td>
+<td>
+
+Connections count relation
 
 </td>
 </tr>
@@ -3045,6 +3434,15 @@ Total connections count
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>totalCountRelation</strong></td>
+<td valign="top"><a href="#s_relationenum">S_RelationEnum</a></td>
+<td>
+
+Connections count relation
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>pageInfo</strong></td>
 <td valign="top"><a href="#s_pageinfo">S_PageInfo</a>!</td>
 <td>
@@ -3113,9 +3511,21 @@ A cursor for use in pagination.
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong>isSuccessful</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
 <td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong> ⚠️</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+<p>⚠️ <strong>DEPRECATED</strong></p>
+<blockquote>
+
+Use success instead
+
+</blockquote>
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>actionId</strong></td>
@@ -3238,30 +3648,6 @@ Platform enum value object
 <td colspan="2" valign="top"><strong>value</strong></td>
 <td valign="top"><a href="#s_platform">S_Platform</a></td>
 <td></td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong>name</strong> ⚠️</td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-<p>⚠️ <strong>DEPRECATED</strong></p>
-<blockquote>
-
-Use label instead
-
-</blockquote>
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong>enum</strong> ⚠️</td>
-<td valign="top"><a href="#s_platform">S_Platform</a></td>
-<td>
-<p>⚠️ <strong>DEPRECATED</strong></p>
-<blockquote>
-
-Use value instead
-
-</blockquote>
-</td>
 </tr>
 </tbody>
 </table>
@@ -3464,20 +3850,20 @@ Auction price
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>acquisitionPrice</strong></td>
-<td valign="top"><a href="#s_moneyinput">S_MoneyInput</a></td>
-<td>
-
-Keys acquisition price. Used for profit calculations
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>addedKeys</strong></td>
 <td valign="top">[<a href="#string">String</a>!]</td>
 <td>
 
 Added keys in plain (text) format
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>acquisitionPrice</strong></td>
+<td valign="top"><a href="#s_moneyinput">S_MoneyInput</a></td>
+<td>
+
+Keys acquisition price. Used for profit calculations
 
 </td>
 </tr>
@@ -3629,6 +4015,10 @@ Transactions sorting options
 <td></td>
 </tr>
 <tr>
+<td valign="top"><strong>AUCTION_CAMPAIGN</strong></td>
+<td></td>
+</tr>
+<tr>
 <td valign="top"><strong>WALLET_WITHDRAW</strong></td>
 <td></td>
 </tr>
@@ -3726,6 +4116,18 @@ Transactions sorting options
 <td valign="top"><strong>FUNDS_RELEASE_FEE</strong></td>
 <td></td>
 </tr>
+<tr>
+<td valign="top"><strong>AUCTION_CAMPAIGN_FEE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>ADMIN_MANUAL_FUNDS</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>PARTIAL_ITEM_REFUND</strong></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
@@ -3784,6 +4186,27 @@ Keys sorting options
 </tr>
 <tr>
 <td valign="top"><strong>SOLD_AT_DESC</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### S_API_ProductsSort
+
+Products sorting options
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>CREATED_AT_ASC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>CREATED_AT_DESC</strong></td>
 <td></td>
 </tr>
 </tbody>
@@ -3997,6 +4420,37 @@ Available platforms in marketplace
 </tbody>
 </table>
 
+### S_RelationEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>EQ</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>LT</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>LTE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>GT</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>GTE</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 ### T_FeeTypeEnum
 
 <table>
@@ -4050,30 +4504,21 @@ Uuid value in hex, formatted 8-4-4-4-12
 
 The `Boolean` scalar type represents `true` or `false`.
 
-### DateTime
-
-Holds date time value
-
 ### Float
 
-The `Float` scalar type represents signed double-precision fractional values as specified by
-[IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
+The `Float` scalar type represents signed double-precision fractional values as specified
+by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 
 ### G_Uuid
 
 Uuid value in hex, formatted 8-4-4-4-12
 
-### ID
-
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type
-appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input
-type, any string (such as `"4"`) or integer
-(such as `4`) input value will be accepted as an ID.
-
 ### Int
 
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31)
 and 2^31 - 1.
+
+### S_AvailableCurrencyType
 
 ### S_DateTime
 

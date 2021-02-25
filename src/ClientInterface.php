@@ -26,7 +26,7 @@ interface ClientInterface
 
     public function getProducts(?ProductsFilter $filter = null): ProductConnection;
 
-    public function getProduct(UuidInterface $productId): ?Product;
+    public function getProduct(UuidInterface $productId, ?int $auctionsLimit = null): ?Product;
 
     public function updateAuction(UuidInterface $auctionId, Money $price): ActionResponse;
 

@@ -189,7 +189,7 @@ class Client implements ClientInterface
         return $this->denormalizer->denormalize($data['data'][Eneba::GQL_PRODUCTS_QUERY], ProductConnection::class);
     }
 
-    public function getProduct(UuidInterface $productId): ?Product
+    public function getProduct(UuidInterface $productId, ?int $auctionsLimit = null): ?Product
     {
         $query = (new Query())
             ->addField(
@@ -201,9 +201,13 @@ class Client implements ClientInterface
                     ]
                 )
             )
-            ->addVariable(new ScalarVariable('$id', 'S_Uuid', true));
+            ->addVariable(new ScalarVariable('$id', 'S_Uuid', true))
+            ->addVariable(new ScalarVariable('$auctionsLimit', 'Int', false));
 
-        $request = $this->createMessage($query->toString(), ['id' => $productId->toString()]);
+        $request = $this->createMessage($query->toString(), [
+            'id' => $productId->toString(),
+            'auctionsLimit' => $auctionsLimit,
+        ]);
 
         $response = $this->client->sendRequest($request);
         $data = $this->handleResponse($response);

@@ -6,6 +6,7 @@ namespace Helis\EnebaClient\Factory\SelectionSet;
 use Helis\EnebaClient\Enum\SelectionSetFactoryProviderNameEnum;
 use Helis\EnebaClient\Provider\SelectionSetFactoryProviderAwareInterface;
 use Helis\EnebaClient\Provider\SelectionSetFactoryProviderAwareTrait;
+use Helis\GraphqlQueryBuilder\Argument\VariableValue;
 use Helis\GraphqlQueryBuilder\SelectionSet\Field;
 use Helis\GraphqlQueryBuilder\SelectionSet\SelectionSet;
 
@@ -37,7 +38,8 @@ class ProductSelectionSetFactory implements SelectionSetFactoryInterface, Select
             $set->add(
                 new Field(
                     'auctions',
-                    $this->provider->get(SelectionSetFactoryProviderNameEnum::AUCTION_CONNECTION())->get()
+                    $this->provider->get(SelectionSetFactoryProviderNameEnum::AUCTION_CONNECTION())->get(),
+                    ['first' => new VariableValue('$auctionsLimit')]
                 )
             );
         }
