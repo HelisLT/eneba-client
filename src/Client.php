@@ -123,12 +123,20 @@ class Client implements ClientInterface
     {
         $query = $this->createConnectionQuery(
             Eneba::GQL_STOCK_QUERY,
-            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get()
+            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get(),
+            [
+                'stockId' => new VariableValue('$stockId'),
+                'productId' => new VariableValue('$productId'),
+            ]
         );
+        $query->addVariable(new ScalarVariable('$stockId', 'S_Uuid'));
+        $query->addVariable(new ScalarVariable('$productId', 'S_Uuid'));
 
         $request = $this->createMessage($query->toString(), $filter ? [
             'cursor' => $this->generateCursor($filter->getPage(), $filter->getPerPage()),
             'limit' => $filter->getPerPage(),
+            'stockId' => $filter->getStockId(),
+            'productId' => $filter->getProductId(),
         ] : []);
 
         $response = $this->client->sendRequest($request);
