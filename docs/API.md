@@ -4151,6 +4151,10 @@ Transactions sorting options
 <td valign="top"><strong>USED</strong></td>
 <td></td>
 </tr>
+<tr>
+<td valign="top"><strong>DISABLED</strong></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
@@ -4207,6 +4211,10 @@ Products sorting options
 </tr>
 <tr>
 <td valign="top"><strong>CREATED_AT_DESC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>POPULARITY_DESC</strong></td>
 <td></td>
 </tr>
 </tbody>
