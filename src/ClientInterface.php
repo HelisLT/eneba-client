@@ -30,6 +30,8 @@ interface ClientInterface
 
     public function updateAuction(UuidInterface $auctionId, Money $price): ActionResponse;
 
+    public function createAuction(UuidInterface $productId, bool $enabled, array $keys, bool $autoRenew, Money $price): ActionResponse;
+
     public function getActionState(UuidInterface $actionId): ?ActionState;
 
     /**

@@ -20,6 +20,7 @@ final class Eneba
     public const GQL_PRODUCT_QUERY = 'S_product';
     public const GQL_ACTION_QUERY = 'A_action';
     public const GQL_UPDATE_AUCTION_MUTATION = 'S_updateAuction';
+    public const GQL_CREATE_AUCTION_MUTATION = 'S_createAuction';
     public const GQL_KEYS_QUERY = 'S_keys';
     public const GQL_COUNT_FEE_QUERY = 'T_countFee';
 }

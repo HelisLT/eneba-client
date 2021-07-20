@@ -123,18 +123,64 @@ class Client implements ClientInterface
     {
         $query = $this->createConnectionQuery(
             Eneba::GQL_STOCK_QUERY,
-            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get()
+            $this->selectionSetFactoryProvider->get(ProviderNameEnum::STOCK_CONNECTION())->get(),
+            [
+                'stockId' => new VariableValue('$stockId'),
+                'productId' => new VariableValue('$productId'),
+            ]
         );
 
+        $query->addVariable(new ScalarVariable('$stockId', 'S_Uuid'));
+        $query->addVariable(new ScalarVariable('$productId', 'S_Uuid'));
         $request = $this->createMessage($query->toString(), $filter ? [
             'cursor' => $this->generateCursor($filter->getPage(), $filter->getPerPage()),
             'limit' => $filter->getPerPage(),
+            'stockId' => $filter->getStockId(),
+            'productId' => $filter->getProductId(),
         ] : []);
 
         $response = $this->client->sendRequest($request);
         $data = $this->handleResponse($response);
 
         return $this->denormalizer->denormalize($data['data'][Eneba::GQL_STOCK_QUERY], StockConnection::class);
+    }
+
+    public function createAuction(UuidInterface $productId, bool $enabled, array $keys, bool $autoRenew, Money $price): ActionResponse
+    {
+
+        $mutation = (new Mutation())
+            ->addField(
+                new Field(
+                    Eneba::GQL_CREATE_AUCTION_MUTATION,
+                    $this->selectionSetFactoryProvider->get(ProviderNameEnum::ACTION_RESPONSE())->get(),
+                    [
+                        'input' => new VariableValue('$input'),
+                    ]
+                )
+            )
+            ->addVariable(new ScalarVariable('$input', 'S_API_CreateAuctionInput', true));
+
+        $request = $this->createMessage($mutation->toString(), [
+            'input' => [
+                'productId' => $productId->toString(),
+                'enabled' => $enabled,
+                'keys' => $keys,
+                'autoRenew' => $autoRenew,
+                'price' => [
+                    'amount' => (int)$price->getAmount(),
+                    'currency' => $price->getCurrency()->getCode(),
+                ]
+            ],
+        ]);
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize(
+            $data['data'][Eneba::GQL_CREATE_AUCTION_MUTATION],
+            ActionResponse::class
+        );
+
     }
 
     public function getSingleStock(UuidInterface $stockId): ?Stock
