@@ -47,6 +47,9 @@ use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @deprecated please use the GraphQL API directly
+ */
 class Client implements ClientInterface
 {
     private $logger;
