@@ -31,6 +31,8 @@
         "webmozart/assert": "^1.7",
         "zendframework/zend-diactoros": "^2.1"
     },
+    "require-dev": {
+    },
     "config": {
         "sort-packages": true,
         "secure-http": false
