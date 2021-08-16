@@ -47,6 +47,7 @@
     * [S_API_StockConnection](#s_api_stockconnection)
     * [S_API_StockEdge](#s_api_stockedge)
     * [S_API_UpdateAuctionResponse](#s_api_updateauctionresponse)
+    * [P_API_RegisterCallbackResponse](#p_api_registercallbackresponse)
     * [S_Money](#s_money)
     * [S_PageInfo](#s_pageinfo)
     * [S_PlatformEnumValue](#s_platformenumvalue)
@@ -56,6 +57,7 @@
     * [S_API_CreateAuctionInput](#s_api_createauctioninput)
     * [S_API_PurchaseGiftCardsInput](#s_api_purchasegiftcardsinput)
     * [S_API_UpdateAuctionInput](#s_api_updateauctioninput)
+    * [P_API_RegisterCallbackInput](#p_api_registercallbackinput)
     * [S_MoneyInput](#s_moneyinput)
 * [Enums](#enums)
     * [A_ActionStateEnum](#a_actionstateenum)
@@ -73,6 +75,7 @@
     * [S_Platform](#s_platform)
     * [S_RelationEnum](#s_relationenum)
     * [T_FeeTypeEnum](#t_feetypeenum)
+    * [P_API_CallbackTypeEnum](#p_api_callbacktypeenum)
 * [Scalars](#scalars)
     * [A_Uuid](#a_uuid)
     * [B_Currency](#b_currency)
@@ -3539,6 +3542,27 @@ Initiated action ID used to check current state of the action
 </tbody>
 </table>
 
+### P_API_RegisterCallbackResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+
 ### S_Money
 
 <table>
@@ -3785,6 +3809,15 @@ Keys counter for pre-order
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>declaredStock</strong></td>
+<td valign="top"><a href="#boolean">Int</a></td>
+<td>
+
+Tells how many keys are available by the ["Declared Stock"](howto/declared-stock.md) feature
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -3891,6 +3924,56 @@ The state of auction. Leave this field empty if not updating it.
 <td>
 
 Should auction be auto renewed. Leave this field empty if not updating it.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>declaredStock</strong></td>
+<td valign="top"><a href="#boolean">Int</a></td>
+<td>
+
+Tells how many keys are available by the ["Declared Stock"](howto/declared-stock.md) feature
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_RegisterCallbackInput
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#int">P_API_CallbackTypeEnum</a>!</td>
+<td>
+
+The type of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>url</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The URL of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>authorization</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+Bearer authorization value used in the header when calling the URL
 
 </td>
 </tr>
@@ -4485,6 +4568,25 @@ Available platforms in marketplace
 </tr>
 <tr>
 <td valign="top"><strong>AUCTION_PRICE_UPDATE</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### P_API_CallbackTypeEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>DECLARED_STOCK_RESERVATION</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>DECLARED_STOCK_PROVISION</strong></td>
 <td></td>
 </tr>
 </tbody>

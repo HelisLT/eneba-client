@@ -7,6 +7,7 @@ use DateTime;
 use Helis\EnebaClient\Credentials\ClientCredentialsInterface;
 use Helis\EnebaClient\Denormalizer\Denormalizer;
 use Helis\EnebaClient\Denormalizer\DenormalizerInterface;
+use Helis\EnebaClient\Denormalizer\NormalizerInterface;
 use Helis\EnebaClient\Enum\FeeTypeEnum;
 use Helis\EnebaClient\Enum\SelectionSetFactoryProviderNameEnum as ProviderNameEnum;
 use Helis\EnebaClient\Exception\GeneralException;
@@ -15,6 +16,7 @@ use Helis\EnebaClient\Exception\HttpException;
 use Helis\EnebaClient\Model\AccessToken;
 use Helis\EnebaClient\Model\ActionResponse;
 use Helis\EnebaClient\Model\ActionState;
+use Helis\EnebaClient\Model\Input\Callback;
 use Helis\EnebaClient\Model\Input\KeysFilter;
 use Helis\EnebaClient\Model\Input\ProductsFilter;
 use Helis\EnebaClient\Model\Input\SalesFilter;
@@ -52,7 +54,16 @@ class Client implements ClientInterface
     private $logger;
     private $client;
     private $messageFactory;
+
+    /**
+     * @var DenormalizerInterface
+     */
     private $denormalizer;
+
+    /**
+     * @var NormalizerInterface
+     */
+    private $normalizer;
     private $credentials;
     private $tokenStorage;
     private $selectionSetFactoryProvider;
@@ -79,7 +90,8 @@ class Client implements ClientInterface
         ?DenormalizerInterface $denormalizer = null,
         ?SelectionSetFactoryProviderInterface $selectionSetFactoryProvider = null,
         ?AccessTokenStorageInterface $tokenStorage = null,
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
+        ?NormalizerInterface $normalizer = null
     ) {
         $this->credentials = $credentials;
         $this->logger = $logger;
@@ -87,6 +99,7 @@ class Client implements ClientInterface
         $this->messageFactory = $messageFactory ?: new DiactorosMessageFactory();
         $this->tokenStorage = $tokenStorage ?: new ArrayAccessTokenStorage();
         $this->denormalizer = $denormalizer ?: Denormalizer::getInstance();
+        $this->normalizer = $normalizer ?: Denormalizer::getInstance();
         $this->selectionSetFactoryProvider = $selectionSetFactoryProvider ?: SelectionSetFactoryProvider::getInstance();
     }
 
@@ -387,6 +400,67 @@ class Client implements ClientInterface
         $data = $this->handleResponse($response);
 
         return $this->denormalizer->denormalize($data['data'][Eneba::GQL_COUNT_FEE_QUERY]['fee'] ?? [], Money::class);
+    }
+
+    public function declareAuctionStock(UuidInterface $auctionId, int $declaredStock): ActionResponse
+    {
+        $mutation = (new Mutation())
+            ->addField(
+                new Field(
+                    Eneba::GQL_UPDATE_AUCTION_MUTATION,
+                    $this->selectionSetFactoryProvider->get(ProviderNameEnum::ACTION_RESPONSE())->get(),
+                    [
+                        'input' => new VariableValue('$input'),
+                    ]
+                )
+            )
+            ->addVariable(new ScalarVariable('$input', 'S_API_UpdateAuctionInput', true));
+
+        $request = $this->createMessage($mutation->toString(), [
+            'input' => [
+                'id' => $auctionId->toString(),
+                'declaredStock' => $declaredStock,
+            ],
+        ]);
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize(
+            $data['data'][Eneba::GQL_UPDATE_AUCTION_MUTATION],
+            ActionResponse::class
+        );
+    }
+
+    public function registerCallback(Callback $callback): ActionResponse
+    {
+        $mutation = (new Mutation())
+            ->addField(
+                new Field(
+                    Eneba::GQL_REGISTER_CALLBACK_MUTATION,
+                    $this->selectionSetFactoryProvider->get(ProviderNameEnum::ACTION_RESPONSE())->get(),
+                    [
+                        'input' => new VariableValue('$input'),
+                    ]
+                )
+            )
+            ->addVariable(new ScalarVariable('$input', 'P_API_RegisterCallbackInput', true))
+        ;
+
+        $request = $this->createMessage(
+            $mutation->toString(),
+            [
+                'input' => $this->normalizer->normalize($callback),
+            ]
+        );
+
+        $response = $this->client->sendRequest($request);
+        $data = $this->handleResponse($response);
+
+        return $this->denormalizer->denormalize(
+            $data['data'][Eneba::GQL_REGISTER_CALLBACK_MUTATION],
+            ActionResponse::class
+        );
     }
 
     public function setOauthClientId(?string $oauthClientId): void

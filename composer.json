@@ -9,11 +9,15 @@
         }
     ],
     "type": "library",
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Helis\\EnebaClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Helis\\EnebaClient\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -33,6 +37,8 @@
         "zendframework/zend-diactoros": "^2.1"
     },
     "require-dev": {
+        "php-http/mock-client": "^1.4",
+        "phpunit/phpunit": "^7.5"
     },
     "config": {
         "sort-packages": true,
