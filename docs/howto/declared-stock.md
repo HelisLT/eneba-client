@@ -32,15 +32,15 @@ The system will make one call to the `Reservation` endpoint with 60s timeout. In
 POST
 ```json
 {
-  action: "RESERVE",
-  orderId: "Uuid",
-  auctions: [
+  "action": "RESERVE",
+  "orderId": "Uuid",
+  "auctions": [
     {
-      auctionId: "Uuid",
-      keyCount: "Int",
-      price: {
-        amount: "Int",
-        currency: "String",
+      "auctionId": "Uuid",
+      "keyCount": "Int",
+      "price": {
+        "amount": "Int",
+        "currency": "String",
       },
     }
   ]
@@ -51,9 +51,9 @@ POST
 200
 ```json
 {
-  action: "RESERVE",
-  orderId: "Uuid",
-  success: true,
+  "action": "RESERVE",
+  "orderId": "Uuid",
+  "success": true,
 }
 ```
 By successfully responding to the `Reservation Request` with the `Reservation Response` structure you indicate that you can fully fulfill the reservation.
@@ -62,7 +62,7 @@ We recommend holding the reservations for up to 48 hours - this is the longest p
 
 ### Provision Request
 
-The system will make 3 attempts with a 5s sleep interval and 60s timeout for you to respond. In case of final failure, the order will be refunded.
+The system will make 3 attempts with a 5s sleep interval and 60s timeout for you to respond. In case of final failure, the order will be canceled.
 
 If the `Provision Request` will end up in a failure, you will be charged the auction’s commission amount.
 
@@ -71,29 +71,29 @@ If the `Provision Request` will end up in failure 3 times in a row for different
 POST 
 ```json
 {
-  action: "PROVIDE",
-  orderId: "Uuid",
+  "action": "PROVIDE",
+  "orderId": "Uuid",
 }
 ```
 
 ### Provision Response
 ```json
 {
-  action: "PROVIDE",
-  orderId: "Uuid",
-  success: true,
-  auctions: [
+  "action": "PROVIDE",
+  "orderId": "Uuid",
+  "success": true,
+  "auctions": [
     {
-      auctionId: "Uuid",
-      keys: [
+      "auctionId": "Uuid",
+      "keys": [
         {
-          type: "TEXT",
-          value: "some key value",
+          "type": "TEXT",
+          "value": "some key value",
         },
         {
-          type: "IMAGE",
-          value: "base64 encoded image contents",
-          filename: "the name of the file",
+          "type": "IMAGE",
+          "value": "base64 encoded image contents",
+          "filename": "the name of the file",
         }
       ]
     }
