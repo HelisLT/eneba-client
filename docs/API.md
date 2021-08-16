@@ -28,18 +28,19 @@
     * [B_PageInfo](#b_pageinfo)
     * [G_API_GiftCardCode](#g_api_giftcardcode)
     * [G_Money](#g_money)
+    * [P_API_RegisterCallbackResponse](#p_api_registercallbackresponse)
     * [S_API_Auction](#s_api_auction)
-    * [S_API_AuctionConnection](#s_api_auctionconnection)
-    * [S_API_AuctionEdge](#s_api_auctionedge)
-    * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
-    * [S_API_Key](#s_api_key)
-    * [S_API_KeyConnection](#s_api_keyconnection)
-    * [S_API_KeyEdge](#s_api_keyedge)
-    * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
-    * [S_API_Product](#s_api_product)
-    * [S_API_ProductConnection](#s_api_productconnection)
-    * [S_API_ProductEdge](#s_api_productedge)
-    * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
+        * [S_API_AuctionConnection](#s_api_auctionconnection)
+        * [S_API_AuctionEdge](#s_api_auctionedge)
+        * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
+        * [S_API_Key](#s_api_key)
+        * [S_API_KeyConnection](#s_api_keyconnection)
+        * [S_API_KeyEdge](#s_api_keyedge)
+        * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
+        * [S_API_Product](#s_api_product)
+        * [S_API_ProductConnection](#s_api_productconnection)
+        * [S_API_ProductEdge](#s_api_productedge)
+        * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
     * [S_API_Sales](#s_api_sales)
     * [S_API_SalesConnection](#s_api_salesconnection)
     * [S_API_SalesEdge](#s_api_salesedge)
@@ -50,9 +51,12 @@
     * [S_Money](#s_money)
     * [S_PageInfo](#s_pageinfo)
     * [S_PlatformEnumValue](#s_platformenumvalue)
+    * [S_ProductRegion](#s_productregion)
+    * [S_ProductTypeEnumValue](#s_producttypeenumvalue)
     * [T_CountFeeResponse](#t_countfeeresponse)
     * [T_Money](#t_money)
 * [Inputs](#inputs)
+    * [P_API_RegisterCallbackInput](#p_api_registercallbackinput)
     * [S_API_CreateAuctionInput](#s_api_createauctioninput)
     * [S_API_PurchaseGiftCardsInput](#s_api_purchasegiftcardsinput)
     * [S_API_UpdateAuctionInput](#s_api_updateauctioninput)
@@ -65,12 +69,14 @@
     * [B_TransactionStatus](#b_transactionstatus)
     * [B_TransactionType](#b_transactiontype)
     * [G_CodeState](#g_codestate)
+    * [P_API_CallbackTypeEnum](#p_api_callbacktypeenum)
     * [S_API_KeysSort](#s_api_keyssort)
     * [S_API_ProductsSort](#s_api_productssort)
     * [S_API_SellingStatus](#s_api_sellingstatus)
     * [S_KeyFormat](#s_keyformat)
     * [S_KeyState](#s_keystate)
     * [S_Platform](#s_platform)
+    * [S_ProductTypeEnum](#s_producttypeenum)
     * [S_RelationEnum](#s_relationenum)
     * [T_FeeTypeEnum](#t_feetypeenum)
 * [Scalars](#scalars)
@@ -608,6 +614,11 @@ Fee type
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>P_noop</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
@@ -674,6 +685,24 @@ Initiate creation of the auction
 <td>
 
 Auction creation data
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>P_registerCallback</strong></td>
+<td valign="top"><a href="#p_api_registercallbackresponse">P_API_RegisterCallbackResponse</a></td>
+<td>
+
+Register the callback URL used in the purchase process
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">input</td>
+<td valign="top"><a href="#p_api_registercallbackinput">P_API_RegisterCallbackInput</a>!</td>
+<td>
+
+Callback URL and Type
 
 </td>
 </tr>
@@ -2420,6 +2449,38 @@ Money currency code
 </tbody>
 </table>
 
+### P_API_RegisterCallbackResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong> ⚠️</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+<p>⚠️ <strong>DEPRECATED</strong></p>
+<blockquote>
+
+Use success instead
+
+</blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+
 ### S_API_Auction
 
 <table>
@@ -2898,6 +2959,15 @@ Product platform
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#s_producttypeenumvalue">S_ProductTypeEnumValue</a></td>
+<td>
+
+Product type
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>releasedAt</strong></td>
 <td valign="top"><a href="#s_datetime">S_DateTime</a></td>
 <td>
@@ -2966,6 +3036,15 @@ Returns up to the last n elements from the list
 <td>
 
 Indicates if product is available for selling
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>regions</strong></td>
+<td valign="top">[<a href="#s_productregion">S_ProductRegion</a>]</td>
+<td>
+
+Product regions
 
 </td>
 </tr>
@@ -3652,6 +3731,66 @@ Platform enum value object
 </tbody>
 </table>
 
+### S_ProductRegion
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>name</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Region name for display
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Code for using in queries
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### S_ProductTypeEnumValue
+
+Product type enum value object
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>label</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>value</strong></td>
+<td valign="top"><a href="#s_producttypeenum">S_ProductTypeEnum</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 ### T_CountFeeResponse
 
 <table>
@@ -3710,6 +3849,47 @@ Money currency code
 </table>
 
 ## Inputs
+
+### P_API_RegisterCallbackInput
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#p_api_callbacktypeenum">P_API_CallbackTypeEnum</a>!</td>
+<td>
+
+The type of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>url</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The URL of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>authorization</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+Bearer authorization value used in the header when calling the URL
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ### S_API_CreateAuctionInput
 
@@ -3782,6 +3962,24 @@ Keys acquisition price. Used for profit calculations
 <td>
 
 Keys counter for pre-order
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>lowStockNotificationEnabled</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+Whether to send email notifications when auction is running low on stock
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>declaredStock</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Tells how many keys are available by the "Declared Stock" feature
 
 </td>
 </tr>
@@ -3891,6 +4089,24 @@ The state of auction. Leave this field empty if not updating it.
 <td>
 
 Should auction be auto renewed. Leave this field empty if not updating it.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>lowStockNotificationEnabled</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+Whether to send email notifications when auction is running low on stock
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>declaredStock</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Tells how many keys are available by the "Declared Stock" feature
 
 </td>
 </tr>
@@ -4030,6 +4246,10 @@ Transactions sorting options
 <td valign="top"><strong>FUNDS_RELEASE</strong></td>
 <td></td>
 </tr>
+<tr>
+<td valign="top"><strong>DELIVERY_AUTHORIZATION_REJECT</strong></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
@@ -4153,6 +4373,25 @@ Transactions sorting options
 </tr>
 <tr>
 <td valign="top"><strong>DISABLED</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### P_API_CallbackTypeEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>DECLARED_STOCK_RESERVATION</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>DECLARED_STOCK_PROVISION</strong></td>
 <td></td>
 </tr>
 </tbody>
@@ -4423,6 +4662,41 @@ Available platforms in marketplace
 </tr>
 <tr>
 <td valign="top"><strong>WINDOWS_STORE</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### S_ProductTypeEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>GAME</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>GIFTCARD</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>GAME_POINTS</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>DLC</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>SOFTWARE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>SUBSCRIPTION</strong></td>
 <td></td>
 </tr>
 </tbody>
