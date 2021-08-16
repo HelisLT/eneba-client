@@ -38,6 +38,7 @@ class Denormalizer implements DenormalizerInterface
      * @var DenormalizerInterface[]
      */
     private $denormalizers;
+
     private $cache = [];
 
     private function __construct()
