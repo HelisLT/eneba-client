@@ -6,7 +6,6 @@ namespace Helis\EnebaClient;
 use Helis\EnebaClient\Enum\FeeTypeEnum;
 use Helis\EnebaClient\Model\ActionResponse;
 use Helis\EnebaClient\Model\ActionState;
-use Helis\EnebaClient\Model\Input\Callback;
 use Helis\EnebaClient\Model\Input\KeysFilter;
 use Helis\EnebaClient\Model\Input\ProductsFilter;
 use Helis\EnebaClient\Model\Input\SalesFilter;
@@ -46,8 +45,4 @@ interface ClientInterface
     public function getAuctionKeys(UuidInterface $auctionId, ?KeysFilter $filter = null): KeyConnection;
 
     public function getFee(FeeTypeEnum $feeType): ?Money;
-
-    public function registerCallback(Callback $callback): ActionResponse;
-
-    public function declareAuctionStock(UuidInterface $auctionId, int $declaredStock): ActionResponse;
 }

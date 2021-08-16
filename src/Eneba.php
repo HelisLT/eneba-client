@@ -22,5 +22,4 @@ final class Eneba
     public const GQL_UPDATE_AUCTION_MUTATION = 'S_updateAuction';
     public const GQL_KEYS_QUERY = 'S_keys';
     public const GQL_COUNT_FEE_QUERY = 'T_countFee';
-    public const GQL_REGISTER_CALLBACK_MUTATION = 'P_registerCallback';
 }
