@@ -5,12 +5,12 @@ You can add and remove keys from your auction's stock if needed.
 Query S_stock with stock ID to get available keys counter (onHand - onHold)
 Perform S_updateAuction mutation to add keys to auction
 
-
 ## 1. Get your auction's ID using `S_stock` query
 
 This step is optional if you already know the ID of the auction.
 
 Request:
+
 ```
 {
   S_stock {
@@ -29,6 +29,7 @@ Request:
 ```
 
 Response:
+
 ```json
 {
   "data": {
@@ -55,6 +56,7 @@ Response:
 Pass your auction ID and new keys to input value.
 
 Request:
+
 ```
 mutation {
   S_updateAuction(
@@ -65,17 +67,32 @@ mutation {
   ) {
     isSuccessful
     actionId
+    addedKeys {
+      id
+      value
+    }
   }
 }
 ```
 
 Response:
+
 ```json
 {
   "data": {
     "S_updateAuction": {
       "isSuccessful": true,
-      "actionId": "7c084dfa-77c0-11ea-b1fb-423c92839f99"
+      "actionId": "7c084dfa-77c0-11ea-b1fb-423c92839f99",
+      "addedKeys": [
+        {
+          "id": "8435b028-0025-11ec-9aae-423c92839f99",
+          "value": "first-key"
+        },
+        {
+          "id": "8435b0dc-0025-11ec-a34a-423c92839f99",
+          "value": "second-key"
+        }
+      ]
     }
   }
 }
@@ -83,8 +100,8 @@ Response:
 
 ## 3. Perform `A_action` query to check action status
 
-Auction update mutation initiates update action and performs it asynchronously.
-You have to poll for actions state to make sure the auction updated successfully. 
+Auction update mutation initiates update action and performs it asynchronously. You have to poll for actions state to
+make sure the auction updated successfully.
 
 [What is action and how to check it's state](check-action-status.md)
 

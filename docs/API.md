@@ -29,18 +29,19 @@
     * [G_API_GiftCardCode](#g_api_giftcardcode)
     * [G_Money](#g_money)
     * [P_API_RegisterCallbackResponse](#p_api_registercallbackresponse)
+    * [S_API_AddedKey](#s_api_addedkey)
     * [S_API_Auction](#s_api_auction)
-        * [S_API_AuctionConnection](#s_api_auctionconnection)
-        * [S_API_AuctionEdge](#s_api_auctionedge)
-        * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
-        * [S_API_Key](#s_api_key)
-        * [S_API_KeyConnection](#s_api_keyconnection)
-        * [S_API_KeyEdge](#s_api_keyedge)
-        * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
-        * [S_API_Product](#s_api_product)
-        * [S_API_ProductConnection](#s_api_productconnection)
-        * [S_API_ProductEdge](#s_api_productedge)
-        * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
+    * [S_API_AuctionConnection](#s_api_auctionconnection)
+    * [S_API_AuctionEdge](#s_api_auctionedge)
+    * [S_API_CreateAuctionResponse](#s_api_createauctionresponse)
+    * [S_API_Key](#s_api_key)
+    * [S_API_KeyConnection](#s_api_keyconnection)
+    * [S_API_KeyEdge](#s_api_keyedge)
+    * [S_API_PriceUpdateQuota](#s_api_priceupdatequota)
+    * [S_API_Product](#s_api_product)
+    * [S_API_ProductConnection](#s_api_productconnection)
+    * [S_API_ProductEdge](#s_api_productedge)
+    * [S_API_PurchaseGiftCardsResponse](#s_api_purchasegiftcardsresponse)
     * [S_API_Sales](#s_api_sales)
     * [S_API_SalesConnection](#s_api_salesconnection)
     * [S_API_SalesEdge](#s_api_salesedge)
@@ -51,10 +52,10 @@
     * [S_Money](#s_money)
     * [S_PageInfo](#s_pageinfo)
     * [S_PlatformEnumValue](#s_platformenumvalue)
-    * [S_ProductRegion](#s_productregion)
-    * [S_ProductTypeEnumValue](#s_producttypeenumvalue)
-    * [T_CountFeeResponse](#t_countfeeresponse)
-    * [T_Money](#t_money)
+        * [S_ProductRegion](#s_productregion)
+        * [S_ProductTypeEnumValue](#s_producttypeenumvalue)
+        * [T_CountFeeResponse](#t_countfeeresponse)
+        * [T_Money](#t_money)
 * [Inputs](#inputs)
     * [P_API_RegisterCallbackInput](#p_api_registercallbackinput)
     * [S_API_CreateAuctionInput](#s_api_createauctioninput)
@@ -2481,6 +2482,39 @@ Use success instead
 </tbody>
 </table>
 
+### S_API_AddedKey
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>id</strong></td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a>!</td>
+<td>
+
+The ID of the key
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>value</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Value of the key. If key is IMAGE - inline image will be returned
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### S_API_Auction
 
 <table>
@@ -3612,6 +3646,15 @@ Use success instead
 <td>
 
 Initiated action ID used to check current state of the action
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>addedKeys</strong></td>
+<td valign="top">[<a href="#s_api_addedkey">S_API_AddedKey</a>!]</td>
+<td>
+
+Pending keys that have been added with current mutation
 
 </td>
 </tr>
