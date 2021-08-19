@@ -9,10 +9,12 @@ To use this feature you need to register 2 [API callbacks](api-callback.md) with
 * `P_API_CallbackTypeEnum::DECLARED_STOCK_RESERVATION`
 * `P_API_CallbackTypeEnum::DECLARED_STOCK_PROVISION`
 
+Optionally, you may want to register the `P_API_CallbackTypeEnum::DECLARED_STOCK_CANCELLATION` callback, this way you will be able to receive a callback when the order gets canceled.
+
 ## How it works
 
-During the purchase process the Eneba.com will call your system twice.
-First call will ask you to reserve the keys for a specific order - a `Reservation request`.
+During the purchase process, Eneba.com will call your system twice.
+The first call will ask you to reserve the keys for a specific order - a `Reservation request`.
 The second one will ask you to provide the purchased keys, called `Provision request`.
 
 ## Example
@@ -23,11 +25,11 @@ First, the platform will sell 10 existing keys, then will use the “Declared St
 
 ## Payloads
 
-Every request from Eneba.com side will be authenticated by the `Authorization` header using the Bearer type and value, submitted when registering the `API callback`.
+Every request from the Eneba.com side will be authenticated by the `Authorization` header using the Bearer type and value, submitted when registering the `API callback`.
 
 ### Reservation Request
 
-The system will make one call to the `Reservation` endpoint with 60s timeout. In case of error the buyer will be informed about the unavailable stock.
+The system will make one call to the `Reservation` endpoint with a 60s timeout. In case of error, the buyer will be informed about the unavailable stock.
 
 POST
 ```json
@@ -60,6 +62,24 @@ By successfully responding to the `Reservation Request` with the `Reservation Re
 
 We recommend holding the reservations for up to 48 hours - this is the longest payment await duration in Eneba.
 
+### Cancellation Request
+
+When a user or a system cancels the order, a cancellation callback will be issued informing you to release the keys for the specific order.
+The system will make 2 attempts with a 5s sleep interval and 60s timeout for you to respond.
+
+POST
+```json
+{
+  "action": "CANCEL",
+  "orderId": "Uuid",
+}
+```
+
+### Cancellation Response
+200
+
+No response body is expected.
+
 ### Provision Request
 
 The system will make 3 attempts with a 5s sleep interval and 60s timeout for you to respond. In case of final failure, the order will be canceled.
@@ -77,6 +97,7 @@ POST
 ```
 
 ### Provision Response
+200
 ```json
 {
   "action": "PROVIDE",
