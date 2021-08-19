@@ -65,7 +65,7 @@ We recommend holding the reservations for up to 48 hours - this is the longest p
 ### Cancellation Request
 
 When a user or a system cancels the order, a cancellation callback will be issued informing you to release the keys for the specific order.
-The system will make one call to the `Cancellation` endpoint with a 60s timeout.
+The system will make 2 attempts with a 5s sleep interval and 60s timeout for you to respond.
 
 POST
 ```json
@@ -76,8 +76,9 @@ POST
 ```
 
 ### Cancellation Response
+200
 
-No response is expected. The non-500 status code will mark the callback as completed, otherwise - failed. 
+No response body is expected.
 
 ### Provision Request
 
@@ -96,6 +97,7 @@ POST
 ```
 
 ### Provision Response
+200
 ```json
 {
   "action": "PROVIDE",
