@@ -121,6 +121,9 @@ POST
   ]
 }
 ```
+## Getting the "Declared Stock" result
+You may find it useful to get the overall result of key purchases made by the "Declared Stock" feature.
+For this you can call the `P_declaredStockResult` query - [read more](declared-stock-result.md).
 
 ## Key returns
 
