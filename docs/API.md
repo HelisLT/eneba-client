@@ -3,14 +3,15 @@
 <details>
   <summary><strong>Table of Contents</strong></summary>
 
-* [Query](#query)
-* [Mutation](#mutation)
-* [Objects](#objects)
+  * [Query](#query)
+  * [Mutation](#mutation)
+  * [Objects](#objects)
     * [A_Action](#a_action)
     * [B_API_AdminManualFundsTransaction](#b_api_adminmanualfundstransaction)
     * [B_API_AffiliateTransaction](#b_api_affiliatetransaction)
     * [B_API_AuctionCampaignFeeTransaction](#b_api_auctioncampaignfeetransaction)
     * [B_API_AuctionEditFeeTransaction](#b_api_auctioneditfeetransaction)
+    * [B_API_AuctionUnfulfilledSaleFeeTransaction](#b_api_auctionunfulfilledsalefeetransaction)
     * [B_API_CurrencyPair](#b_api_currencypair)
     * [B_API_DepositTransaction](#b_api_deposittransaction)
     * [B_API_ExchangeTransaction](#b_api_exchangetransaction)
@@ -28,7 +29,14 @@
     * [B_PageInfo](#b_pageinfo)
     * [G_API_GiftCardCode](#g_api_giftcardcode)
     * [G_Money](#g_money)
+    * [P_API_Callback](#p_api_callback)
+    * [P_API_CallbackFailureReason](#p_api_callbackfailurereason)
+    * [P_API_CallbackRequest](#p_api_callbackrequest)
+    * [P_API_CallbackResponse](#p_api_callbackresponse)
+    * [P_API_CallbackResult](#p_api_callbackresult)
+    * [P_API_DeclaredStockResult](#p_api_declaredstockresult)
     * [P_API_RegisterCallbackResponse](#p_api_registercallbackresponse)
+    * [P_API_RemoveCallbackResponse](#p_api_removecallbackresponse)
     * [S_API_AddedKey](#s_api_addedkey)
     * [S_API_Auction](#s_api_auction)
     * [S_API_AuctionConnection](#s_api_auctionconnection)
@@ -52,17 +60,18 @@
     * [S_Money](#s_money)
     * [S_PageInfo](#s_pageinfo)
     * [S_PlatformEnumValue](#s_platformenumvalue)
-        * [S_ProductRegion](#s_productregion)
-        * [S_ProductTypeEnumValue](#s_producttypeenumvalue)
-        * [T_CountFeeResponse](#t_countfeeresponse)
-        * [T_Money](#t_money)
-* [Inputs](#inputs)
+    * [S_ProductRegion](#s_productregion)
+    * [S_ProductTypeEnumValue](#s_producttypeenumvalue)
+    * [T_CountFeeResponse](#t_countfeeresponse)
+    * [T_Money](#t_money)
+  * [Inputs](#inputs)
     * [P_API_RegisterCallbackInput](#p_api_registercallbackinput)
+    * [P_API_RemoveCallbackInput](#p_api_removecallbackinput)
     * [S_API_CreateAuctionInput](#s_api_createauctioninput)
     * [S_API_PurchaseGiftCardsInput](#s_api_purchasegiftcardsinput)
     * [S_API_UpdateAuctionInput](#s_api_updateauctioninput)
     * [S_MoneyInput](#s_moneyinput)
-* [Enums](#enums)
+  * [Enums](#enums)
     * [A_ActionStateEnum](#a_actionstateenum)
     * [B_API_TransactionsSort](#b_api_transactionssort)
     * [B_DirectionEnum](#b_directionenum)
@@ -70,6 +79,7 @@
     * [B_TransactionStatus](#b_transactionstatus)
     * [B_TransactionType](#b_transactiontype)
     * [G_CodeState](#g_codestate)
+    * [P_API_CallbackStatusEnum](#p_api_callbackstatusenum)
     * [P_API_CallbackTypeEnum](#p_api_callbacktypeenum)
     * [S_API_KeysSort](#s_api_keyssort)
     * [S_API_ProductsSort](#s_api_productssort)
@@ -80,7 +90,7 @@
     * [S_ProductTypeEnum](#s_producttypeenum)
     * [S_RelationEnum](#s_relationenum)
     * [T_FeeTypeEnum](#t_feetypeenum)
-* [Scalars](#scalars)
+  * [Scalars](#scalars)
     * [A_Uuid](#a_uuid)
     * [B_Currency](#b_currency)
     * [B_DateTime](#b_datetime)
@@ -89,18 +99,19 @@
     * [Float](#float)
     * [G_Uuid](#g_uuid)
     * [Int](#int)
+    * [P_DateTime](#p_datetime)
+    * [P_Uuid](#p_uuid)
     * [S_AvailableCurrencyType](#s_availablecurrencytype)
     * [S_DateTime](#s_datetime)
     * [S_Uuid](#s_uuid)
     * [String](#string)
     * [T_AvailableCurrencyType](#t_availablecurrencytype)
-* [Interfaces](#interfaces)
+  * [Interfaces](#interfaces)
     * [B_API_TransactionInterface](#b_api_transactioninterface)
 
 </details>
 
 ## Query
-
 <table>
 <thead>
 <tr>
@@ -616,15 +627,32 @@ Fee type
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>P_noop</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a></td>
+<td colspan="2" valign="top"><strong>P_apiCallbacks</strong></td>
+<td valign="top">[<a href="#p_api_callback">P_API_Callback</a>!]</td>
 <td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>P_declaredStockResult</strong></td>
+<td valign="top"><a href="#p_api_declaredstockresult">P_API_DeclaredStockResult</a></td>
+<td>
+
+The result of DeclaredStock requests
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">orderId</td>
+<td valign="top"><a href="#p_uuid">P_Uuid</a>!</td>
+<td>
+
+The ID of the Order, processed by DeclaredStock
+
+</td>
 </tr>
 </tbody>
 </table>
 
 ## Mutation
-
 <table>
 <thead>
 <tr>
@@ -704,6 +732,24 @@ Register the callback URL used in the purchase process
 <td>
 
 Callback URL and Type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>P_removeCallback</strong></td>
+<td valign="top"><a href="#p_api_removecallbackresponse">P_API_RemoveCallbackResponse</a></td>
+<td>
+
+Remove the callback URL used in purchase process
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">input</td>
+<td valign="top"><a href="#p_api_removecallbackinput">P_API_RemoveCallbackInput</a>!</td>
+<td>
+
+Callback ID to remove
 
 </td>
 </tr>
@@ -1150,6 +1196,140 @@ Auction ID
 <td>
 
 Reference name
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_AuctionUnfulfilledSaleFeeTransaction
+
+Auction unfulfilled sale transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>feeType</strong></td>
+<td valign="top"><a href="#b_feetype">B_FeeType</a></td>
+<td>
+
+Fee type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>auctionId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Auction ID
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>referenceName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Reference name
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>orderId</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Order ID
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>quantity</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+The quantity for which the fee is calculated
 
 </td>
 </tr>
@@ -2450,7 +2630,264 @@ Money currency code
 </tbody>
 </table>
 
+### P_API_Callback
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>id</strong></td>
+<td valign="top"><a href="#p_uuid">P_Uuid</a>!</td>
+<td>
+
+ID of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#p_api_callbacktypeenum">P_API_CallbackTypeEnum</a>!</td>
+<td>
+
+The type of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>url</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The URL of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>authorization</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+Bearer authorization value used in the header when calling the URL
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_CallbackFailureReason
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>reason</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The code for the failure
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>details</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The detailed information about the failure
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_CallbackRequest
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#p_datetime">P_DateTime</a>!</td>
+<td>
+
+The time when the callback was created and then made
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>callbackResponse</strong></td>
+<td valign="top"><a href="#p_api_callbackresponse">P_API_CallbackResponse</a></td>
+<td>
+
+The callback response received from the merchant
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>failureReason</strong></td>
+<td valign="top"><a href="#p_api_callbackfailurereason">P_API_CallbackFailureReason</a></td>
+<td>
+
+The structured info why the callback has failed
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_CallbackResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>response</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The HTTP response body or cURL error
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The HTTP or cURL status code
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_CallbackResult
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#p_api_callbackstatusenum">P_API_CallbackStatusEnum</a>!</td>
+<td>
+
+The status of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#p_api_callbacktypeenum">P_API_CallbackTypeEnum</a>!</td>
+<td>
+
+The type of the callback
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>callbackRequests</strong></td>
+<td valign="top">[<a href="#p_api_callbackrequest">P_API_CallbackRequest</a>!]!</td>
+<td>
+
+The Requests made to the merchant
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_DeclaredStockResult
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>callbackResults</strong></td>
+<td valign="top">[<a href="#p_api_callbackresult">P_API_CallbackResult</a>!]!</td>
+<td>
+
+The list of done API callbacks
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### P_API_RegisterCallbackResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong> ⚠️</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+<p>⚠️ <strong>DEPRECATED</strong></p>
+<blockquote>
+
+Use success instead
+
+</blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_RemoveCallbackResponse
 
 <table>
 <thead>
@@ -3479,6 +3916,15 @@ Amount of keys on hold
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>declaredStock</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Amount of keys in declared-stock
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>status</strong></td>
 <td valign="top"><a href="#s_api_sellingstatus">S_API_SellingStatus</a>!</td>
 <td>
@@ -3934,6 +4380,29 @@ Bearer authorization value used in the header when calling the URL
 </tbody>
 </table>
 
+### P_API_RemoveCallbackInput
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>id</strong></td>
+<td valign="top"><a href="#p_uuid">P_Uuid</a>!</td>
+<td>
+
+Callback ID
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### S_API_CreateAuctionInput
 
 <table>
@@ -4278,6 +4747,10 @@ Transactions sorting options
 <td></td>
 </tr>
 <tr>
+<td valign="top"><strong>AUCTION_UNFULFILLED_SALE</strong></td>
+<td></td>
+</tr>
+<tr>
 <td valign="top"><strong>WALLET_WITHDRAW</strong></td>
 <td></td>
 </tr>
@@ -4376,6 +4849,10 @@ Transactions sorting options
 <td></td>
 </tr>
 <tr>
+<td valign="top"><strong>AUCTION_UNFULFILLED_SALE_FEE</strong></td>
+<td></td>
+</tr>
+<tr>
 <td valign="top"><strong>FUNDS_RELEASE_FEE</strong></td>
 <td></td>
 </tr>
@@ -4421,6 +4898,41 @@ Transactions sorting options
 </tbody>
 </table>
 
+### P_API_CallbackStatusEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>NEW</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>READY</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>SENT</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>FAILED</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>RETRYING</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>COMPLETED</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 ### P_API_CallbackTypeEnum
 
 <table>
@@ -4435,6 +4947,10 @@ Transactions sorting options
 </tr>
 <tr>
 <td valign="top"><strong>DECLARED_STOCK_PROVISION</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>DECLARED_STOCK_CANCELLATION</strong></td>
 <td></td>
 </tr>
 </tbody>
@@ -4831,8 +5347,7 @@ The `Boolean` scalar type represents `true` or `false`.
 
 ### Float
 
-The `Float` scalar type represents signed double-precision fractional values as specified
-by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 
 ### G_Uuid
 
@@ -4840,8 +5355,15 @@ Uuid value in hex, formatted 8-4-4-4-12
 
 ### Int
 
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31)
-and 2^31 - 1.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+
+### P_DateTime
+
+Holds date time value
+
+### P_Uuid
+
+Uuid value in hex, formatted 8-4-4-4-12
 
 ### S_AvailableCurrencyType
 
@@ -4855,12 +5377,13 @@ Uuid value in hex, formatted 8-4-4-4-12
 
 ### String
 
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most
-often used by GraphQL to represent free-form human-readable text.
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 
 ### T_AvailableCurrencyType
 
+
 ## Interfaces
+
 
 ### B_API_TransactionInterface
 
