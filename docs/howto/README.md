@@ -7,6 +7,7 @@
 - [Managing the stock of your auction](manage-stock.md)
   - [Automate your stock with the "Declared Stock" feature](declared-stock.md)
   - [Get the results of "Declared Stock" purchases](declared-stock-result.md)
+  - [Test your "Declared Stock" integration in the sandbox](declared-stock-sandbox.md)
 - [Getting your sales report](get-sales-report.md)
 - [Tracking reported keys](get-auctions-keys.md#get-your-auctions-reported-keys-using-s_keys)
 - [Get balance transactions](get-balance-transactions.md)
