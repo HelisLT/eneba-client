@@ -11,6 +11,7 @@
     * [B_API_AffiliateTransaction](#b_api_affiliatetransaction)
     * [B_API_AuctionCampaignFeeTransaction](#b_api_auctioncampaignfeetransaction)
     * [B_API_AuctionEditFeeTransaction](#b_api_auctioneditfeetransaction)
+    * [B_API_AuctionRenewFeeTransaction](#b_api_auctionrenewfeetransaction)
     * [B_API_AuctionUnfulfilledSaleFeeTransaction](#b_api_auctionunfulfilledsalefeetransaction)
     * [B_API_CurrencyPair](#b_api_currencypair)
     * [B_API_DepositTransaction](#b_api_deposittransaction)
@@ -35,6 +36,7 @@
     * [P_API_CallbackResponse](#p_api_callbackresponse)
     * [P_API_CallbackResult](#p_api_callbackresult)
     * [P_API_DeclaredStockResult](#p_api_declaredstockresult)
+    * [P_API_EnableDeclaredStockResponse](#p_api_enabledeclaredstockresponse)
     * [P_API_RegisterCallbackResponse](#p_api_registercallbackresponse)
     * [P_API_RemoveCallbackResponse](#p_api_removecallbackresponse)
     * [S_API_AddedKey](#s_api_addedkey)
@@ -81,6 +83,7 @@
     * [G_CodeState](#g_codestate)
     * [P_API_CallbackStatusEnum](#p_api_callbackstatusenum)
     * [P_API_CallbackTypeEnum](#p_api_callbacktypeenum)
+    * [P_API_DeclaredStockEnablingFailureEnum](#p_api_declaredstockenablingfailureenum)
     * [S_API_KeysSort](#s_api_keyssort)
     * [S_API_ProductsSort](#s_api_productssort)
     * [S_API_SellingStatus](#s_api_sellingstatus)
@@ -492,6 +495,15 @@ Products sorting option
 </td>
 </tr>
 <tr>
+<td colspan="2" align="right" valign="top">slugs</td>
+<td valign="top">[<a href="#string">String</a>!]</td>
+<td>
+
+Product slugs to search for
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>S_product</strong></td>
 <td valign="top"><a href="#s_api_product">S_API_Product</a></td>
 <td>
@@ -750,6 +762,15 @@ Remove the callback URL used in purchase process
 <td>
 
 Callback ID to remove
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>P_enableDeclaredStock</strong></td>
+<td valign="top"><a href="#p_api_enabledeclaredstockresponse">P_API_EnableDeclaredStockResponse</a></td>
+<td>
+
+Enable the DeclaredStock feature. This requires a successful DeclaredStock integration in the Sandbox.
 
 </td>
 </tr>
@@ -1196,6 +1217,113 @@ Auction ID
 <td>
 
 Reference name
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### B_API_AuctionRenewFeeTransaction
+
+Auction renew fee transaction
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>code</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+Shorter and unique transaction identifier
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#b_transactiontype">B_TransactionType</a></td>
+<td>
+
+Transaction type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>status</strong></td>
+<td valign="top"><a href="#b_transactionstatus">B_TransactionStatus</a></td>
+<td>
+
+Transaction status
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>direction</strong></td>
+<td valign="top"><a href="#b_directionenum">B_DirectionEnum</a></td>
+<td>
+
+Transaction direction
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>money</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Transaction amount
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertingTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is reverting current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>revertedTransaction</strong></td>
+<td valign="top"><a href="#b_api_transactioninterface">B_API_TransactionInterface</a></td>
+<td>
+
+Transaction which is being reverted by current transaction.
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#b_datetime">B_DateTime</a></td>
+<td>
+
+Transaction creation date and time
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>feeType</strong></td>
+<td valign="top"><a href="#b_feetype">B_FeeType</a></td>
+<td>
+
+Fee type
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>auctionId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Auction ID
 
 </td>
 </tr>
@@ -2803,7 +2931,7 @@ The HTTP or cURL status code
 <tbody>
 <tr>
 <td colspan="2" valign="top"><strong>status</strong></td>
-<td valign="top"><a href="#p_api_callbackstatusenum">P_API_CallbackStatusEnum</a>!</td>
+<td valign="top"><a href="#p_api_callbackstatusenum">P_API_CallbackStatusEnum</a></td>
 <td>
 
 The status of the callback
@@ -2849,6 +2977,47 @@ The Requests made to the merchant
 <td>
 
 The list of done API callbacks
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### P_API_EnableDeclaredStockResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong>success</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>isSuccessful</strong> ⚠️</td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+<p>⚠️ <strong>DEPRECATED</strong></p>
+<blockquote>
+
+Use success instead
+
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>failureReason</strong></td>
+<td valign="top"><a href="#p_api_declaredstockenablingfailureenum">P_API_DeclaredStockEnablingFailureEnum</a></td>
+<td>
+
+The reason why DeclaredStock cannot be enabled
 
 </td>
 </tr>
@@ -3966,6 +4135,25 @@ Price update quota for stock
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>position</strong></td>
+<td valign="top"><a href="#int">Int</a></td>
+<td>
+
+Your auction position for the product
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>positionLabel</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>positionTooltip</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
@@ -4951,6 +5139,33 @@ Transactions sorting options
 </tr>
 <tr>
 <td valign="top"><strong>DECLARED_STOCK_CANCELLATION</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### P_API_DeclaredStockEnablingFailureEnum
+
+<table>
+<thead>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>NO_RESERVATION_FOUND</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>NO_PROVISION_FOUND</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>LAST_RESERVATION_NOT_SUCCESSFUL</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>LAST_PROVISION_NOT_SUCCESSFUL</strong></td>
 <td></td>
 </tr>
 </tbody>

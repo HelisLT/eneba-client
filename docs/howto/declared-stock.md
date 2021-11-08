@@ -10,6 +10,8 @@ To use this feature you need to register 2 [API callbacks](api-callback.md) with
 * `P_API_CallbackTypeEnum::DECLARED_STOCK_RESERVATION`
 * `P_API_CallbackTypeEnum::DECLARED_STOCK_PROVISION`
 
+You also need to activate the "Declared Stock" feature in the production. It is required that your DeclaredStock implementation on the Eneba sandbox is [fully tested](declared-stock-sandbox.md).
+
 Optionally, you may want to register the `P_API_CallbackTypeEnum::DECLARED_STOCK_CANCELLATION` callback, this way you will be able to receive a callback when the order gets canceled.
 
 ## How it works
@@ -133,6 +135,36 @@ POST
   ]
 }
 ```
+
+## Activating the "Declared Stock"
+
+> This action requires a successful "Declared Stock" integration in the Eneba sandbox. 
+> Please read the "Declared Stock" [sandbox integration](declared-stock-sandbox.md).
+
+To use this feature, you need to explicitly activate it in the production. To do this, please execute the mutation:
+```GraphQl
+mutation {
+    P_enableDeclaredStock {
+        success
+        failureReason
+    }
+}
+```
+
+Successful response:
+```json
+{
+  "data": {
+    "P_enableDeclaredStock": {
+      "success": true,
+      "failureReason": null
+    }
+  }
+}
+```
+
+In case of `success: false`, please refer to the `failureReason` and revise your "Declared Stock" integration as described in the [Eneba sandbox guidelines](declared-stock-sandbox.md).
+
 ## Getting the "Declared Stock" result
 You may find it useful to get the overall result of key purchases made by the "Declared Stock" feature.
 For this you can call the `P_declaredStockResult` query - [read more](declared-stock-result.md).
