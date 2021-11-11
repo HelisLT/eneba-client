@@ -4,13 +4,25 @@ You can automate your auction's stock by providing `declaredStock` value with th
 By declaring the `declaredStock` value you tell how many keys you have on your side excluding the already submitted keys.   
 In order to use "declared stock" You don't even have to supply keys to Your auction
 
+## Important
+
+* It is required that your DeclaredStock implementation on the Eneba sandbox is [fully tested](declared-stock-sandbox.md).
+* If the `Provision Request` will end up in a failure, you will be charged the auction’s commission amount.
+* Eneba will hide your auction if the ratio of failed and completed requests in last hour is higher than the threshold:
+  * `Reservation Request`:
+    * `log(failed_requests)/log(completed_reques) >= 0.4`
+    * Auction will be hidden for 2 hours.
+  * `Provision Request`:
+    * `log(failed_requests)/log(completed_reques) >= 0.2`
+    * Auction will be hidden for 2 hours.
+
 ## Requirements
 
 To use this feature you need to register 2 [API callbacks](api-callback.md) with types:
 * `P_API_CallbackTypeEnum::DECLARED_STOCK_RESERVATION`
 * `P_API_CallbackTypeEnum::DECLARED_STOCK_PROVISION`
 
-You also need to activate the "Declared Stock" feature in the production. It is required that your DeclaredStock implementation on the Eneba sandbox is [fully tested](declared-stock-sandbox.md).
+You also need to activate the "Declared Stock" feature in the production, please read below.
 
 Optionally, you may want to register the `P_API_CallbackTypeEnum::DECLARED_STOCK_CANCELLATION` callback, this way you will be able to receive a callback when the order gets canceled.
 
@@ -94,8 +106,6 @@ Example:
 - Wait time: 5 seconds
 - Request 3: Fails
 - Order gets cancelled
-
-If the `Provision Request` will end up in a failure, you will be charged the auction’s commission amount.
 
 If the `Provision Request` will end up in failure 3 times in a row for different buyers, Eneba can disable the auction to prevent reputation damage.
 
