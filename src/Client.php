@@ -57,6 +57,7 @@ class Client implements ClientInterface
     private $tokenStorage;
     private $selectionSetFactoryProvider;
 
+
     /**
      * @var string|null
      */
