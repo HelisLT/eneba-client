@@ -7,7 +7,7 @@ In order to use "declared stock" You don't even have to supply keys to Your auct
 ## Important
 
 * It is required that your DeclaredStock implementation on the Eneba sandbox is [fully tested](declared-stock-sandbox.md).
-* If the `Provision Request` will end up in a failure, you will be charged the auction’s commission amount.
+* **If the `Provision Request` will end up in a failure, you will be charged the auction’s commission amount**.
 * Eneba will hide your auction if the ratio of failed and completed requests in last hour is higher than the threshold:
   * `Reservation Request`:
     * `log(failed_requests)/log(completed_reques) >= 0.4`
