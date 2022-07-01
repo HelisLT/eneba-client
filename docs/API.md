@@ -477,6 +477,15 @@ Returns products created since given date
 </td>
 </tr>
 <tr>
+<td colspan="2" align="right" valign="top">releasedSince</td>
+<td valign="top"><a href="#s_datetime">S_DateTime</a></td>
+<td>
+
+Returns products released or to be released since given date
+
+</td>
+</tr>
+<tr>
 <td colspan="2" align="right" valign="top">search</td>
 <td valign="top"><a href="#string">String</a></td>
 <td>
@@ -590,6 +599,15 @@ Upper date and time range of sale
 <td>
 
 The ID of the auction. If NULL provided - all sales will be returned
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">orderId</td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a></td>
+<td>
+
+The ID of the order. If NULL provided - all sales will be returned
 
 </td>
 </tr>
@@ -2395,6 +2413,15 @@ Associated order number
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>orderId</strong></td>
+<td valign="top"><a href="#b_uuid">B_Uuid</a></td>
+<td>
+
+Associated order ID
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>presale</strong></td>
 <td valign="top"><a href="#boolean">Boolean</a></td>
 <td></td>
@@ -2414,6 +2441,15 @@ Reference name
 <td>
 
 Sold key id
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>fullPaidPriceForOrderItem</strong></td>
+<td valign="top"><a href="#b_money">B_Money</a></td>
+<td>
+
+Full price paid by user for order items
 
 </td>
 </tr>
@@ -3162,6 +3198,15 @@ Is auction available for purchase
 <td>
 
 Auction's merchant name
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>belongsToYou</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+Indicates if this auction belongs to you
 
 </td>
 </tr>
@@ -3940,6 +3985,15 @@ Order number associated with this sale
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>orderId</strong></td>
+<td valign="top"><a href="#s_uuid">S_Uuid</a></td>
+<td>
+
+Order ID associated with this sale
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -4675,6 +4729,15 @@ Whether to send email notifications when auction is running low on stock
 </td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>priceChangeNotificationEnabled</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+Whether to send email notifications when auction price is not the lowest one
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>declaredStock</strong></td>
 <td valign="top"><a href="#int">Int</a></td>
 <td>
@@ -4798,6 +4861,15 @@ Should auction be auto renewed. Leave this field empty if not updating it.
 <td>
 
 Whether to send email notifications when auction is running low on stock
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>priceChangeNotificationEnabled</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a></td>
+<td>
+
+Whether to send email notifications when auction price is not the lowest one
 
 </td>
 </tr>
@@ -5018,6 +5090,10 @@ Transactions sorting options
 </tr>
 <tr>
 <td valign="top"><strong>AFFILIATE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td valign="top"><strong>AFFILIATE_PAYOUT</strong></td>
 <td></td>
 </tr>
 <tr>
