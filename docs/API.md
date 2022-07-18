@@ -297,24 +297,6 @@ Returns up to the first n elements from the list
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right" valign="top">before</td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-Returns the elements that come before the specified cursor
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">last</td>
-<td valign="top"><a href="#int">Int</a></td>
-<td>
-
-Returns up to the last n elements from the list
-
-</td>
-</tr>
-<tr>
 <td colspan="2" align="right" valign="top">stockId</td>
 <td valign="top"><a href="#s_uuid">S_Uuid</a></td>
 <td>
@@ -441,24 +423,6 @@ Returns up to the first n elements from the list
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right" valign="top">before</td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-Returns the elements that come before the specified cursor
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">last</td>
-<td valign="top"><a href="#int">Int</a></td>
-<td>
-
-Returns up to the last n elements from the list
-
-</td>
-</tr>
-<tr>
 <td colspan="2" align="right" valign="top">onlyUnmapped</td>
 <td valign="top"><a href="#boolean">Boolean</a></td>
 <td>
@@ -473,6 +437,15 @@ Returns only unmapped products
 <td>
 
 Returns products created since given date
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">releasedSince</td>
+<td valign="top"><a href="#s_datetime">S_DateTime</a></td>
+<td>
+
+Returns products released or to be released since given date
 
 </td>
 </tr>
@@ -554,24 +527,6 @@ Returns the elements that come after the specified cursor
 <td>
 
 Returns up to the first n elements from the list
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">before</td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-Returns the elements that come before the specified cursor
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">last</td>
-<td valign="top"><a href="#int">Int</a></td>
-<td>
-
-Returns up to the last n elements from the list
 
 </td>
 </tr>
@@ -3694,24 +3649,6 @@ Returns the elements that come after the specified cursor
 <td>
 
 Returns up to the first n elements from the list
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">before</td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-Returns the elements that come before the specified cursor
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">last</td>
-<td valign="top"><a href="#int">Int</a></td>
-<td>
-
-Returns up to the last n elements from the list
 
 </td>
 </tr>
