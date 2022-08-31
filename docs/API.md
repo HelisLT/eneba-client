@@ -4715,6 +4715,15 @@ Amount of gift cards to purchase
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>currency</strong></td>
+<td valign="top"><a href="#int">S_GiftCardCurrencyType</a></td>
+<td>
+
+Gift card currency, default EUR, available EUR, USD, GBP, PLN, AUD, CAD, CLP, ARS, BRL
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -5608,6 +5617,9 @@ Uuid value in hex, formatted 8-4-4-4-12
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 
 ### T_AvailableCurrencyType
+
+### S_GiftCardCurrencyType
+
 
 
 ## Interfaces
