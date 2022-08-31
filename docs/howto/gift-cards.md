@@ -9,7 +9,7 @@ mutation {
   S_purchaseGiftCards(
     input: {
         denomination: 100
-        quantity: 1
+        quantity: 3
         currency: "EUR"
     }
   )
