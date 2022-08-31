@@ -109,6 +109,7 @@
     * [S_Uuid](#s_uuid)
     * [String](#string)
     * [T_AvailableCurrencyType](#t_availablecurrencytype)
+    * [S_GiftCardCurrencyType](#s_giftcardcurrencytype)
   * [Interfaces](#interfaces)
     * [B_API_TransactionInterface](#b_api_transactioninterface)
 
@@ -4717,7 +4718,7 @@ Amount of gift cards to purchase
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>currency</strong></td>
-<td valign="top"><a href="#int">S_GiftCardCurrencyType</a></td>
+<td valign="top"><a href="#s_giftcardcurrencytype">S_GiftCardCurrencyType</a></td>
 <td>
 
 Gift card currency, default EUR, available EUR, USD, GBP, PLN, AUD, CAD, CLP, ARS, BRL
