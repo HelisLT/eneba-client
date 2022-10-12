@@ -16,3 +16,4 @@
 - [Check action status](check-action-status.md)
 - [Track reported keys](tracking-reported-keys.md)
 - [Register API callback](api-callback.md)
+- [Generating gift cards](gift-cards.md)
