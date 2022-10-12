@@ -24,7 +24,11 @@ To use this feature you need to register 2 [API callbacks](api-callback.md) with
 
 You also need to activate the "Declared Stock" feature in the production, please read below.
 
-Optionally, you may want to register the `P_API_CallbackTypeEnum::DECLARED_STOCK_CANCELLATION` callback, this way you will be able to receive a callback when the order gets canceled.
+Optionally, you may want to register the `P_API_CallbackTypeEnum::DECLARED_STOCK_CANCELLATION` callback, this way you will be able to receive a callback when the order gets canceled. 
+
+All [API callback](api-callback.md) urls must conform to specific [rule set](api-callback-url-rules.md).
+
+**In order to use "declared stock" feature you must prove your domain ownership. More on that [here](declared-stock-domain-ownership.md)**
 
 ## How it works
 
