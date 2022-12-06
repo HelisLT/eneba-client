@@ -28,6 +28,42 @@ Request:
 }
 ```
 
+You may also include filters for your stock (All filter fields are optional)  
+All filters follow boolean AND logic  
+All filter fields can be found [here](./../API.md#s_api_stockfilters) (S_API_StockFilters type)  
+
+```
+{
+  S_stock(filters: {
+    enabled: false,
+    price: {
+        from: 10000,
+        to: 200000
+    },
+    createdAt: {
+        from: "2022-01-01 00:00:00",
+        to: "2022-12-01 00:00:00"
+    },
+    updatedAt: {
+        from: "2022-11-01 00:00:00",
+        to: "2022-12-01 00:00:00"
+    },
+    sort: PRICE_DESC
+  }) {
+    edges {
+      node {
+        id
+        onHand
+        onHold
+        product {
+          name
+        }
+      }
+    }
+  }
+}
+```
+
 Response:
 
 ```json
