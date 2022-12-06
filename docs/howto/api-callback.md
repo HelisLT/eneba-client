@@ -3,6 +3,8 @@
 You can register various callback URLs to your system based on the feature you use. 
 The specific callback requirements will be listed by the exact features.
 
+All [API callback](api-callback.md) urls must conform to specific [rule set](api-callback-url-rules.md).
+
 Request:
 ```GraphQl
 mutation {

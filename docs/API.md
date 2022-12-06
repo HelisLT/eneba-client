@@ -109,6 +109,7 @@
     * [S_Uuid](#s_uuid)
     * [String](#string)
     * [T_AvailableCurrencyType](#t_availablecurrencytype)
+    * [S_GiftCardCurrencyType](#s_giftcardcurrencytype)
   * [Interfaces](#interfaces)
     * [B_API_TransactionInterface](#b_api_transactioninterface)
 
@@ -437,6 +438,15 @@ Returns only unmapped products
 <td>
 
 Returns products created since given date
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">releasedSince</td>
+<td valign="top"><a href="#s_datetime">S_DateTime</a></td>
+<td>
+
+Returns products released or to be released since given date
 
 </td>
 </tr>
@@ -4706,6 +4716,15 @@ Amount of gift cards to purchase
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>currency</strong></td>
+<td valign="top"><a href="#s_giftcardcurrencytype">S_GiftCardCurrencyType</a></td>
+<td>
+
+Gift card currency, default EUR, available EUR, USD, GBP, PLN, AUD, CAD, CLP, ARS, BRL
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -5600,6 +5619,7 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 
 ### T_AvailableCurrencyType
 
+### S_GiftCardCurrencyType
 
 ## Interfaces
 
