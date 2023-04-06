@@ -1,5 +1,8 @@
 # How To
 
+## Notice: No longer maintained
+Documentation moved to [https://api.eneba.com/documentation/](https://api.eneba.com/documentation/)
+
 - [Authorize](authorization.md)
 - [Monitor the competition of your auctions](monitor-competition.md)
 - [Updating the price of the auction](updating-price.md)

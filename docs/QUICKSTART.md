@@ -1,5 +1,8 @@
 # Quick start
 
+## Notice: No longer maintained
+Documentation moved to [https://api.eneba.com/documentation/](https://api.eneba.com/documentation/)
+
 ## General Overview
 
 The API is based on GraphQL, you can read more about the technology [here](https://graphql.org/learn/).

@@ -1,3 +1,4 @@
 # How To
 
-[Guide moved here](howto/README.md)
+## Notice: No longer maintained
+Documentation moved to [https://api.eneba.com/documentation/](https://api.eneba.com/documentation/)
